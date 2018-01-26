@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
 import { 
-  FETCH_POSTS,
-  FETCH_POST,
+  REQUEST_POSTS,
+  RECEIVE_POSTS,
+  REQUEST_POST,
   ADD_POST,
   DELETE_POST,
   UPDATE_POST,
@@ -21,48 +22,24 @@ function removeByKey(myObject, deleteKey) {
     }, {});
 }
 
-const defaultPostState = [
-    {
-        "id": "8xf0y6ziyjabvozdd253nd",
-        "timestamp": 1467166872634,
-        "title": "Udacity is the best place to learn React",
-        "body": "Everyone says so after all.",
-        "author": "thingtwo",
-        "category": "react",
-        "voteScore": 6,
-        "deleted": false,
-        "commentCount": 2
-    },
-    {
-        "id": "6ni6ok3ym7mf1p33lnez",
-        "timestamp": 1468479767190,
-        "title": "Learn Redux in 10 minutes!",
-        "body": "Just kidding. It takes more than 10 minutes to learn technology.",
-        "author": "thingone",
-        "category": "redux",
-        "voteScore": -5,
-        "deleted": false,
-        "commentCount": 0
-    },
-    {
-        "id": "8xf0y6ziyjabvozdd2asdf3nd",
-        "timestamp": 1467166872700,
-        "title": "Post toegevoegd door arend",
-        "body": "Everyone says so after all.",
-        "author": "arend",
-        "category": "react",
-        "voteScore": 1,
-        "deleted": false,
-        "commentCount": 0
-    }
-]
+const defaultPostState = {
+  isFetching: false,
+  items: []
+}
 
 function posts(state = defaultPostState, action) {
   switch(action.type) {
-    case FETCH_POSTS:
-      return state;
-    case FETCH_POST:
-      return state;
+    case REQUEST_POSTS:
+      return {
+        ...state,
+          isFetching: true
+      };
+    case RECEIVE_POSTS:
+      return {
+        ...state,
+          isFetching: false,
+          items: action.posts
+      };
     case ADD_POST:
       return {
         ...state,

@@ -21,9 +21,10 @@ class PostSingle extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  //console.log('ownProps', ownProps);
+  // console.log('ownProps', ownProps);
+  // console.log('state', state);
   return {
-    post: state.posts.filter((post) => (post.id === ownProps.match.params.id))[0],
+    post: state.posts.items.filter((post) => (post.id === ownProps.match.params.id))[0],
     commentsList: state.comments.filter((comment) => (comment.parentId === ownProps.match.params.id))
   }
 }
