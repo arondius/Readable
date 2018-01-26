@@ -2,19 +2,27 @@ import React, { Component } from 'react';
 import Post from './Post';
 import { fetchPosts } from '../actions'
 import { connect } from 'react-redux';
+import LoadingIndicator from './LoadingIndicator'
 
 class PostList extends Component {
-  componentDidMount() {
-    if(!this.props.postList) {
-      this.props.dispatch(fetchPosts());
+  renderPostsOrLoadingIndicator() {
+    if(this.props.postList.isFetching) {
+        return <LoadingIndicator />
+    }
+    if(this.props.postList.items.length > 0) {
+      return(
+        <ul>
+          {this.props.postList.items.map(post => <li key={post.id}><Post post={post} /></li>)}
+        </ul>
+      )
     }
   }
 
   render() {
     return(
-      <ul>
-        {this.props.postList.map(post => <li key={post.id}><Post post={post} /></li>)}
-      </ul>
+      <div>
+        {this.renderPostsOrLoadingIndicator()}
+      </div>
     )
   }
 }
