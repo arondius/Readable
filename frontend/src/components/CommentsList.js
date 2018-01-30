@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Comment from './Comment';
-import { fetchComments } from '../actions'
+// import { fetchComments } from '../actions'
 //import { connect } from 'react-redux';
 
 class CommentsList extends Component {

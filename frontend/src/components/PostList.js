@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Post from './Post';
-import { fetchPosts } from '../actions'
+// import { fetchPosts } from '../actions'
 import { connect } from 'react-redux';
 import LoadingIndicator from './LoadingIndicator'
 

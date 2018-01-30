@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const LoadingIndicator = () => (
   // Borrowed from https://codepen.io/aurer/pen/jEGbA
