@@ -2,14 +2,16 @@ import { combineReducers } from 'redux';
 import { 
   REQUEST_POSTS,
   RECEIVE_POSTS,
-  REQUEST_POST,
+  // REQUEST_POST,
   ADD_POST,
   DELETE_POST,
   UPDATE_POST,
   FETCH_COMMENTS,
   ADD_COMMENT,
   DELETE_COMMENT,
-  UPDATE_COMMENT, 
+  UPDATE_COMMENT,
+  TOGGLE_POST_FORM,
+  CLOSE_POST_FORM
 } from '../actions'
 
 function removeByKey(myObject, deleteKey) {
@@ -99,6 +101,31 @@ function comments(state = defaultCommentState, action) {
   }
 }
 
+const defaultpostEditState = {
+    id: null,
+    mode: null,
+    open: false
+}
+
+function postEditForm(state = defaultpostEditState, action) {
+  switch(action.type) {
+    case TOGGLE_POST_FORM:
+      return {
+        ...state,
+        id: action.id,
+        open: (!state.open || (state.mode !== action.mode) || (state.id !== action.id && state.open)) ? true: false,
+        mode: action.mode
+      }
+    case CLOSE_POST_FORM:
+        return {
+          ...state,
+            open: false
+        }
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
-    posts, comments
+    posts, comments, postEditForm
 });

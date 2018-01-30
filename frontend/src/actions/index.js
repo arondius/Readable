@@ -34,7 +34,6 @@ export function fetchPosts(category = null) {
     }
     
     const requetsUrl = category ? `${url}category/${category}/posts` : `${url}posts`
-    //console.log('fetch', fetch(requetsUrl, myInit));
     const myRequest = new Request(requetsUrl, myInit);
     return fetch(myRequest)
     .then(
@@ -103,9 +102,20 @@ export const downVote = (id) => ({
 
 // Category ADD_COMMENTion creators
 export const SELECT_CATEGORY = 'SELECT_CATEGORY'
-export function selectCategory(category) {
-  return {
-    type: SELECT_CATEGORY,
-    category
-  }
-}
+export const selectCategory = (category) => ({
+  type: SELECT_CATEGORY,
+  category
+})
+
+export const TOGGLE_POST_FORM = 'TOGGLE_POST_FORM'
+export const togglePostForm = (id, mode) => ({
+  type: TOGGLE_POST_FORM,
+  id,
+  mode
+})
+
+export const CLOSE_POST_FORM = 'CLOSE_POST_FORM'
+export const closePostForm = (id) => ({
+  type: CLOSE_POST_FORM,
+  id
+})

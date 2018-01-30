@@ -1,84 +1,18 @@
 import React, { Component } from 'react';
-import uuidGen from 'uuid';
 import { connect } from 'react-redux';
-import { addPost, deletePost, updatePost } from '../actions'
+import {togglePostForm} from '../actions'
 import { Link } from 'react-router-dom'
 import PostForm from './PostForm'
 
 class Post extends Component {  
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      postForm: {
-        isOpen: false,
-        postEditing: null
-      }
-    };
-  }
-  
-  handleDeletePost() {
-    this.props.dispatch(deletePost(this.props.post.id));
-  }
-  
-  handleEditPost(post = null, e) {
-    e.preventDefault();
-    // the form is open
-    if(this.state.postForm.isOpen) {
-      // are we editing a post?
-      if(this.state.postForm.postEditing) { 
-        this.setState((state) => (
-          {
-            ...state,
-              postForm: {
-                ...state.postForm,
-                  postEditing: null
-              }
-          }
-        ));
-      }
-      // close form
-      this.setState((state) => (
-        {
-          ...state,
-            postForm: {
-              ...state.postForm,
-                isOpen: false
-            }
-        }
-      ));
-    }
-    // the form is closed 
-    else { 
-      // did we receive a post (I.E. do we edit an exisitng post?)
-      if(post) {
-        console.log('post',post)
-        this.setState((state) => (
-          {
-            ...state,
-            postForm: {
-              ...state.postForm,
-                postEditing: post
-            }
-          }
-        ));
-      }
-      // open form
-      this.setState(state => (
-        {
-          ...state,
-            postForm: {
-              ...state.postForm,
-                isOpen: true
-          }
-        }
-      ));
-    }
-  }
-
   render() {
-    // console.log('Post.js this.props', this.props);
-    console.log('Post.js this.state', this.state);
+    const id = this.props.post.id
+    const postEditForm = this.props.postEditForm
+
+    // console.log('Post.js this.props.post.id', id);
+    console.log('Post.js this.props', this.props);
+    // console.log('Post.js this.state', this.state);
     return(
       <div>
         <h1><Link to={`/post/${this.props.post.id}`}>{this.props.post.title}</Link></h1>
@@ -86,19 +20,42 @@ class Post extends Component {
         <p>{this.props.post.author}</p>
         <p>{this.props.post.category}</p>
         <p>{this.props.post.voteScore}</p>
-        <button onClick={(e) => this.handleEditPost(e)}>Add Post</button>
-        <button onClick={(e) => this.handleEditPost(this.props.post, e)}>Edit Post</button>
-        <button onClick={(e) => this.handleAddPost(e)}>Delete Post</button>
-        {this.state.postForm.isOpen ? <PostForm /> : null}
+        {console.log('Post.js this.props.post.id', id)}
+        <button onClick={() => {this.props.toggleAddPostClick(id)}}>Add Post</button>
+        <button onClick={() => {this.props.toggleEditPostClick(id)}}>Edit Post</button>
+
+
+
+
+        {/* <button onClick={this.props.dispatch(deletePost(this.props.post.id))}>Delete Post</button> */}
+
+
+        {console.log("postEditForm.open", postEditForm.open)}
+        {(postEditForm.open !== false && postEditForm.id === id)  ? 
+          <PostForm 
+            mode={postEditForm.mode} 
+            post={postEditForm.mode === 'edit' ? this.props.post : undefined} 
+          />
+        : 
+        null}
       </div>
     )
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    posts: state.posts
-  }
-}
+const mapStateToProps = (state) => ({
+    posts: state.posts,
+    postEditForm: state.postEditForm
+})
 
-export default connect(mapStateToProps)(Post);
+const mapDispatchToProps = (dispatch) => ({
+  dispatch,
+  toggleAddPostClick(id) {
+    dispatch(togglePostForm(id, "add"))
+  },
+  toggleEditPostClick(id) {
+    dispatch(togglePostForm(id, "edit"))
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post);
