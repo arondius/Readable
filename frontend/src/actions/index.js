@@ -15,12 +15,6 @@ export const receivePosts = (category, json) => ({
   receivedAt: Date.now
 })
 
-export const REQUEST_POST = 'REQUEST_POST';
-export const requestPost = (id) => ({
-  type: REQUEST_POST,
-  id
-})
-
 export function fetchPosts(category = null) {
   return function(dispatch) {
     dispatch(requestPosts(category))
@@ -42,6 +36,50 @@ export function fetchPosts(category = null) {
     .then(json => dispatch(receivePosts(category, json)))
   }
 }
+
+export const REQUEST_SAVE_POST = 'REQUEST_SAVE_POST';
+export const requestSavePost = (id, title, body, author, category, timestamp) => ({
+  type: REQUEST_SAVE_POST,
+  id,
+  title,
+  body,
+  author,
+  category,
+  timestamp,
+})
+
+export function savePost(id, title, body, author, category, timestamp) {
+  return function(dispatch) {
+    dispatch(requestSavePost(id, title, body, author, category, timestamp))
+    
+    const data = {id, title, body, author, category, timestamp}
+    
+    const myHeaders = new Headers({
+      'Authorization': '1234',
+      'Content-Type': 'application/json'
+    });
+    
+    const myInit = {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: myHeaders,
+    }
+    
+    const requetsUrl = `${url}posts`
+    const myRequest = new Request(requetsUrl, myInit);
+    return fetch(myRequest)
+    .then(
+      response => console.log(response.json()), error => console.log('An error occured: ', error)
+    )
+    .then(() => dispatch(fetchPosts(null)))
+  }
+}
+
+export const REQUEST_POST = 'REQUEST_POST';
+export const requestPost = (id) => ({
+  type: REQUEST_POST,
+  id
+})
 
 export const ADD_POST = 'ADD_POST';
 export const addPost = (id, title, body) => ({
@@ -88,17 +126,44 @@ export const updateComment = (id) => ({
 })
 
 // Votes action creators
-export const UPP_VOTE = 'UPP_VOTE';
-export const uppVote = (id) => ({
-  type: UPP_VOTE,
+export const REQUEST_UP_VOTE = 'REQUEST_UP_VOTE';
+export const requestUpVote = (id) => ({
+  type: REQUEST_UP_VOTE,
   id
 })
 
-export const DOWN_VOTE = 'DOWN_VOTE';
-export const downVote = (id) => ({
-  type: DOWN_VOTE,
+export const REQUEST_DOWN_VOTE = 'REQUEST_DOWN_VOTE';
+export const requestDownVote = (id) => ({
+  type: REQUEST_DOWN_VOTE,
   id
 })
+
+export function vote(id, option) {
+  return function(dispatch) {
+    const voteOption = option === 'upvote' ? requestUpVote(id) : requestDownVote(id);
+    dispatch(voteOption);
+    
+    const myHeaders = new Headers({
+      'Authorization': '1234',
+      'Content-Type': 'application/json'
+    });
+    
+    const data = {option}
+    const myInit = {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: myHeaders,
+    }
+    
+    const requetsUrl = `${url}posts/${id}`
+    const myRequest = new Request(requetsUrl, myInit);
+    return fetch(myRequest)
+    .then(
+      response => response.json(), error => console.log('An error occured: ', error)
+    )
+    .then(() => dispatch(fetchPosts(null)))
+  }
+}
 
 // Category ADD_COMMENTion creators
 export const SELECT_CATEGORY = 'SELECT_CATEGORY'

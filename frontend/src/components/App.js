@@ -7,7 +7,7 @@ import { Route } from 'react-router-dom';
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className="page-container">
         <Route exact path="/" component={PostList} />
         <Route path="/post/:id" component={PostSingle}/>
       </div>

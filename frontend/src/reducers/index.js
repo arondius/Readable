@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form'
+
 import { 
   REQUEST_POSTS,
   RECEIVE_POSTS,
   // REQUEST_POST,
-  ADD_POST,
+  REQUEST_SAVE_POST,
   DELETE_POST,
   UPDATE_POST,
   FETCH_COMMENTS,
@@ -11,7 +13,9 @@ import {
   DELETE_COMMENT,
   UPDATE_COMMENT,
   TOGGLE_POST_FORM,
-  CLOSE_POST_FORM
+  CLOSE_POST_FORM,
+  REQUEST_UP_VOTE,
+  REQUEST_DOWN_VOTE
 } from '../actions'
 
 function removeByKey(myObject, deleteKey) {
@@ -42,18 +46,21 @@ function posts(state = defaultPostState, action) {
           isFetching: false,
           items: action.posts
       };
-    case ADD_POST:
+    case REQUEST_SAVE_POST:
       return {
         ...state,
-          [action.id]: {
-            title: action.title,
-            body: action.body
-          }
-      }
+          isFetching: true
+        };
     case DELETE_POST:
       return removeByKey(state, action.id);
     case UPDATE_POST:
       return state;
+    case REQUEST_UP_VOTE:
+    case REQUEST_DOWN_VOTE:
+      return {
+        ...state,
+        isFetching: true
+      }
     default:
       return state;
   }
@@ -127,5 +134,5 @@ function postEditForm(state = defaultpostEditState, action) {
 }
 
 export default combineReducers({
-    posts, comments, postEditForm
+    posts, comments, postEditForm, form: formReducer
 });

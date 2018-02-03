@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {togglePostForm} from '../actions'
 import { Link } from 'react-router-dom'
-import PostForm from './PostForm'
+import PostFormContainer from './PostFormContainer'
+import VoteWidget from './VoteWidget'
 
 class Post extends Component {  
 
@@ -11,18 +12,24 @@ class Post extends Component {
     const postEditForm = this.props.postEditForm
 
     // console.log('Post.js this.props.post.id', id);
-    console.log('Post.js this.props', this.props);
+    // console.log('Post.js this.props', this.props);
     // console.log('Post.js this.state', this.state);
     return(
       <div>
-        <h1><Link to={`/post/${this.props.post.id}`}>{this.props.post.title}</Link></h1>
+        <h1>
+          <Link 
+            className="title-link" 
+            to={`/post/${this.props.post.id}`}>
+            {this.props.post.title}
+          </Link>
+        </h1>
         <p>{this.props.post.body}</p>
         <p>{this.props.post.author}</p>
         <p>{this.props.post.category}</p>
-        <p>{this.props.post.voteScore}</p>
-        {console.log('Post.js this.props.post.id', id)}
-        <button onClick={() => {this.props.toggleAddPostClick(id)}}>Add Post</button>
-        <button onClick={() => {this.props.toggleEditPostClick(id)}}>Edit Post</button>
+        <VoteWidget post={this.props.post} />
+
+        {/* <button onClick={() => {this.props.toggleAddPostClick(id)}}>Add Post</button> */}
+        <button className="btn btn--primary" onClick={() => {this.props.toggleEditPostClick(id)}}>Edit Post</button>
 
 
 
@@ -30,14 +37,13 @@ class Post extends Component {
         {/* <button onClick={this.props.dispatch(deletePost(this.props.post.id))}>Delete Post</button> */}
 
 
-        {console.log("postEditForm.open", postEditForm.open)}
-        {(postEditForm.open !== false && postEditForm.id === id)  ? 
-          <PostForm 
-            mode={postEditForm.mode} 
-            post={postEditForm.mode === 'edit' ? this.props.post : undefined} 
-          />
-        : 
-        null}
+        {/* {console.log("postEditForm.open", postEditForm.open)} */}
+
+        <PostFormContainer
+          mode={'edit'}
+          post={this.props.post}
+          id={id}
+        />
       </div>
     )
   }

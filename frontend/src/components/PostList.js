@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Post from './Post';
+import PostPreview from './PostPreview';
 // import { fetchPosts } from '../actions'
 import { connect } from 'react-redux';
 import LoadingIndicator from './LoadingIndicator'
@@ -11,8 +11,8 @@ class PostList extends Component {
     }
     if(this.props.postList.items.length > 0) {
       return(
-        <ul>
-          {this.props.postList.items.map(post => <li key={post.id}><Post post={post} /></li>)}
+        <ul className="postlist">
+          {this.props.postList.items.map(post => <li key={post.id}><PostPreview post={post} /></li>)}
         </ul>
       )
     }
@@ -20,7 +20,7 @@ class PostList extends Component {
 
   render() {
     return(
-      <div>
+      <div className="container">
         {this.renderPostsOrLoadingIndicator()}
       </div>
     )
