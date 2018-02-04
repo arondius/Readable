@@ -16,13 +16,7 @@ class Post extends Component {
     // console.log('Post.js this.state', this.state);
     return(
       <div>
-        <h1>
-          <Link 
-            className="title-link" 
-            to={`/post/${this.props.post.id}`}>
-            {this.props.post.title}
-          </Link>
-        </h1>
+        <h1>{this.props.post.title}</h1>
         <p>{this.props.post.body}</p>
         <p>{this.props.post.author}</p>
         <p>{this.props.post.category}</p>
