@@ -20,7 +20,7 @@ class Post extends Component {
         <p>{this.props.post.body}</p>
         <p>{this.props.post.author}</p>
         <p>{this.props.post.category}</p>
-        <VoteWidget post={this.props.post} />
+        <VoteWidget id={this.props.post.id} type="posts" voteScore={this.props.post.voteScore}/>
 
         {/* <button onClick={() => {this.props.toggleAddPostClick(id)}}>Add Post</button> */}
         <button className="btn btn--primary" onClick={() => {this.props.toggleEditPostClick(id)}}>Edit Post</button>

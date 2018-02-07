@@ -169,7 +169,8 @@ export const requestDownVote = (id) => ({
   id
 })
 
-export function vote(id, option) {
+export function vote(id, option, type) {
+  console.log('id, option, type', id, option, type);
   return function(dispatch) {
     const voteOption = option === 'upvote' ? requestUpVote(id) : requestDownVote(id);
     dispatch(voteOption);
@@ -186,13 +187,13 @@ export function vote(id, option) {
       headers: myHeaders,
     }
     
-    const requetsUrl = `${url}posts/${id}`
+    const requetsUrl = `${url}${type}/${id}`
     const myRequest = new Request(requetsUrl, myInit);
     return fetch(myRequest)
     .then(
       response => response.json(), error => console.log('An error occured: ', error)
     )
-    .then(() => dispatch(fetchPosts(null)))
+    .then(() => {return dispatch(fetchPosts(null)); return dispatch(fetchComments(null))})
   }
 }
 

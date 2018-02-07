@@ -17,7 +17,7 @@ class PostPreview extends Component {
         </h1>
         <p>Author: {this.props.post.author}</p>
         <p>Category: {this.props.post.category}</p>
-        <VoteWidget post={this.props.post} />
+        <VoteWidget id={this.props.post.id} type="posts" voteScore={this.props.post.voteScore} />
         <Link className="btn btn--primary" to={`/post/${this.props.post.id}`}>View Post</Link>
       </div>
     )
