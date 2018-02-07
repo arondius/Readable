@@ -29,7 +29,7 @@ class PostSingle extends Component {
           <h3><Link to="/"><i className="fas fa-arrow-circle-left heading-icon heading-icon--left"></i>Back to the list of Posts</Link></h3>
           {this.renderPostsOrLoadingIndicator()}
           <h2>Comments</h2>
-          {/* <CommentsList commentsList={this.props.commentsList}/> */}
+          <CommentsList id={this.props.match.params.id} commentsList={this.props.commentsList}/>
         </div>
         <Sidebar>
           <PostFormContainer
