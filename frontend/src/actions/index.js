@@ -102,10 +102,41 @@ export const updatePost = (id) => ({
 })
 
 // Comments action creators
-export const FETCH_COMMENTS = 'FETCH_COMMENTS';
-export const fetchComments = () => ({
-  type: FETCH_COMMENTS,
+export const REQUEST_COMMENTS = 'REQUEST_COMMENTS';
+export const requestComments = (id) => ({
+  type: REQUEST_COMMENTS,
+  id
 })
+
+export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
+export const receiveComments = (id, json) => ({
+  type: RECEIVE_COMMENTS,
+  id,
+  comments: json,
+  receivedAt: Date.now
+})
+
+export function fetchComments(postId = null) {
+  return function(dispatch) {
+    dispatch(requestComments(postId))
+    
+    const myHeaders = new Headers({
+      'Authorization': '1234'
+    });
+    const myInit = {
+      method: 'GET',
+      headers: myHeaders,
+    }
+    
+    const requetsUrl = `${url}posts/${postId}/comments`
+    const myRequest = new Request(requetsUrl, myInit);
+    return fetch(myRequest)
+    .then(
+      response => response.json(), error => console.log('An error occured: ', error)
+    )
+    .then(json => dispatch(receiveComments(postId, json)))
+  }
+}
 
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const addComment = (id) => ({

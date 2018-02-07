@@ -1,27 +1,40 @@
 import React, { Component } from 'react';
 import Comment from './Comment';
-// import { fetchComments } from '../actions'
-//import { connect } from 'react-redux';
+import LoadingIndicator from './LoadingIndicator'
+import { fetchComments } from '../actions'
+import { connect } from 'react-redux';
 
 class CommentsList extends Component {
-  // componentDidMount() {
-  //   this.props.dispatch(fetchComments());
-  // }
+  componentWillMount() {
+    this.props.dispatch(fetchComments(this.props.id));
+  }
+  
+  renderCommentsOrLoadingIndicator() {
+    console.log(this.props.commentsList);
+    if(this.props.commentsList.isFetching) {
+        return <LoadingIndicator />
+    }
+
+    if(this.props.commentsList.items.length > 0) {
+      return(
+        this.props.commentsList.items.map(comment => <li key={comment.id}><Comment comment={comment} /></li>)
+      )
+    }
+  }
 
   render() {
-    console.log('CommentsList Props', this.props);
     return(
       <ul>
-        {this.props.commentsList.map(comment => <li key={comment.id}><Comment comment={comment} /></li>)}
+        {this.renderCommentsOrLoadingIndicator()}
       </ul>
     )
   }
 }
 
-// function mapStateToProps(state) {
-//   return {
-//     commentsList: state.comments,
-//   }
-// }
+function mapStateToProps(state) {
+  return {
+    commentsList: state.comments,
+  }
+}
 
-export default CommentsList
+export default connect(mapStateToProps)(CommentsList)

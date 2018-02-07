@@ -8,7 +8,8 @@ import {
   REQUEST_SAVE_POST,
   DELETE_POST,
   UPDATE_POST,
-  FETCH_COMMENTS,
+  REQUEST_COMMENTS,
+  RECEIVE_COMMENTS,
   ADD_COMMENT,
   DELETE_COMMENT,
   UPDATE_COMMENT,
@@ -66,39 +67,31 @@ function posts(state = defaultPostState, action) {
   }
 }
 
-const defaultCommentState = [
-    {
-        "id": "894tuq4ut84ut8v4t8wun89g",
-        "parentId": "8xf0y6ziyjabvozdd253nd",
-        "timestamp": 1468166872634,
-        "body": "Hi there! I am a COMMENT.",
-        "author": "thingtwo",
-        "voteScore": 6,
-        "deleted": false,
-        "parentDeleted": false
-    },
-    {
-        "id": "8tu4bsun805n8un48ve89",
-        "parentId": "8xf0y6ziyjabvozdd253nd",
-        "timestamp": 1469479767190,
-        "body": "Comments. Are. Cool.",
-        "author": "thingone",
-        "voteScore": -5,
-        "deleted": false,
-        "parentDeleted": false
-    }
-]
+const defaultCommentsState = {
+  isFetching: false,
+  items: []
+}
 
-function comments(state = defaultCommentState, action) {
+function comments(state = defaultCommentsState, action) {
   switch(action.type) {
-    case FETCH_COMMENTS:
-      return state;
+    
     case ADD_COMMENT:
       return state;
     case DELETE_COMMENT:
       return state;
     case UPDATE_COMMENT:
       return state;
+    case REQUEST_COMMENTS:
+      return {
+        ...state,
+        isFetching: true
+      };
+    case RECEIVE_COMMENTS:
+      return {
+        ...state,
+        isFetching: false,
+        items: action.comments
+      };
     // case UPP_VOTE:
     //   return state;
     // case DOWN_VOTE:
