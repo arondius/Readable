@@ -188,6 +188,7 @@ export function vote(id, option, type) {
     }
     
     const requetsUrl = `${url}${type}/${id}`
+    // console.log('requetsUrl', requetsUrl);
     const myRequest = new Request(requetsUrl, myInit);
     return fetch(myRequest)
     .then(
