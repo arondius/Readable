@@ -1,42 +1,27 @@
 @import "../node_modules/normalize-scss/sass/normalize/import-now";
 
+$dark-grey: #423b3e;
+$light-green: #c1f6f5;
+
+$green: #64dd78;
+$red: #dd6464;
+$medium-green: #7cabab;
+$light-purple: #f6c1de;
+$medium-purple: #bd6193;
+
 * {
   box-sizing: border-box;
 }
 
 body {
-  color: #423b3e;
+  color: $dark-grey;
   font-family: 'Lato', sans-serif;
   line-height: 1.5;
 }
 
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
 .loaing-indicator__svg path,
 .loaing-indicator__svg circle{
-  fill: #7cabab;
+  fill: $medium-green;
 }
 
 .loading-indicator {
@@ -61,7 +46,7 @@ svg {
 a:link,
 a:visited {
   text-decoration: none;
-  color: #7cabab;
+  color: $medium-green;
 }
 
 .page-container {
@@ -70,12 +55,12 @@ a:visited {
   align-items: center;
   min-width: 100vw;
   min-height: 100vh;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#c1f6f5+0,f6c1de+100 */
-  background: #c1f6f5; /* Old browsers */
-  background: -moz-linear-gradient(-45deg, #c1f6f5 0%, #f6c1de 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(-45deg, #c1f6f5 0%,#f6c1de 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(135deg, #c1f6f5 0%,#f6c1de 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c1f6f5', endColorstr='#f6c1de',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/$light-green+0,f6c1de+100 */
+  background: $light-green; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, $light-green 0%, $medium-purple 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, $light-green 0%,$medium-purple 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, $light-green 0%,$medium-purple 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$light-green', endColorstr='$medium-purple',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
 .container {
@@ -110,31 +95,38 @@ a:visited {
   margin-top: 10px;
   margin-right: 10px;
   margin-bottom: 10px;
+  text-transform: uppercase;;
   background: transparent;
   font-weight: 400;
+  font-size: 12px;
+  line-height: 1;
   user-select: none;
   letter-spacing: 0.05em;
 }
 
 .btn--primary {
-  color: #bd6193;
-  border-color: #bd6193;
+  color: $medium-purple;
+  border-color: $medium-purple;
 }
 
 .btn--primary:link,
 .btn--primary:visited {
-  color: #bd6193;
-  border-color: #bd6193;
+  color: $light-purple;
+  border-color: $light-purple;
 }
 
 input, textarea {
   padding: 4px;
   border-top: 0;
   border-right: 0;
-  border-bottom: 1px solid #7babab;
+  border-bottom: 1px solid $medium-green;
   border-left: 0;
   width: 100%;
   margin-bottom: 8px;
+}
+
+input, textarea, select {
+  width: 100%;
 }
 
 .vote-widget__container {
@@ -157,21 +149,21 @@ input, textarea {
 }
 
 .vote-widget__vote-btn--up {
-  color: #64dd78;
-  border-color: #64dd78;
+  color: $green;
+  border-color: $green;
 }
 
 .fa-thumbs-up {
-  fill: #64dd78;
+  fill: $green;
 }
 
 .vote-widget__vote-btn--down {
-  color: #dd6464;
-  border-color: #dd6464;
+  color: $red;
+  border-color: $red;
 }
 
 .fa-thumbs-down {
-  fill: #dd6464;
+  fill: $red;
 }
 
 .btn:link,
@@ -189,9 +181,10 @@ input, textarea {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #7cabab;
+  color: $medium-green;
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
+  line-height: 1;
 }
 
 .heading-icon {
@@ -205,14 +198,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .title-link:link,
 .title-link:visited {
-  color: #7cabab;
+  color: $medium-green;
   text-decoration: none;
   transition: transform 1s ease;
 }
 
 .title-link:hover,
 .title-link:active {
-  color: #7cabab;
+  color: $medium-green;
   transform: translateX(5px);
   transition: transform 1s ease;
 }
