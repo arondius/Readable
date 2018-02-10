@@ -1,15 +1,31 @@
 import React, { Component } from 'react';
-import PostList from './PostList';
+import PostListContainer from './PostListContainer';
+import CommentListContainer from './CommentListContainer';
 import PostSingle from './PostSingle';
+import Sidebar from './Sidebar'
 import '../App.css';
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 
 class App extends Component {
   render() {
     return (
       <div className="page-container">
-        <Route exact path="/" component={PostList} />
-        <Route path="/post/:id" component={PostSingle}/>
+        <div className="container">
+          <Route exact path="/" component={PostListContainer} />
+          <Route path="/post/:id" component={PostSingle}/>
+          <Route path="/category/:category" component={CommentListContainer}/>
+          <Sidebar>
+            <h2>Categories:</h2>
+            <ul>
+              <li>
+                <Link to="/category/react">React</Link>
+              </li>
+              <li>
+                <Link to="/category/redux">Redux</Link>
+              </li>
+            </ul>
+          </Sidebar>
+        </div>
       </div>
     );
   }

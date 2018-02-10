@@ -29,12 +29,12 @@ function removeByKey(myObject, deleteKey) {
     }, {});
 }
 
-const defaultPostState = {
+const defaultPostsState = {
   isFetching: false,
   items: []
 }
 
-function posts(state = defaultPostState, action) {
+function posts(state = defaultPostsState, action) {
   switch(action.type) {
     case REQUEST_POSTS:
       return {

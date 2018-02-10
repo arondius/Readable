@@ -27,7 +27,7 @@ export function fetchPosts(category = null) {
       headers: myHeaders,
     }
     
-    const requetsUrl = category ? `${url}category/${category}/posts` : `${url}posts`
+    const requetsUrl = category ? `${url}${category}/posts` : `${url}posts`
     const myRequest = new Request(requetsUrl, myInit);
     return fetch(myRequest)
     .then(
