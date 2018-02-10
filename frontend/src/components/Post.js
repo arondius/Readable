@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {togglePostForm} from '../actions'
-import { Link } from 'react-router-dom'
 import PostFormContainer from './PostFormContainer'
 import VoteWidget from './VoteWidget'
 
