@@ -33,11 +33,14 @@ class Post extends Component {
 
         {/* {console.log("postEditForm.open", postEditForm.open)} */}
 
-        <PostFormContainer
-          mode={'edit'}
-          post={this.props.post}
-          id={id}
-        />
+        {this.props.postEditForm.open ? 
+          <PostFormContainer
+            mode={'edit'}
+            post={this.props.post}
+            id={id}
+          />
+        : null
+        }
       </div>
     )
   }
