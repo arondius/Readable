@@ -48,7 +48,7 @@ let PostForm = props => {
             <option value="Udacity">Udacity</option>
           </Field>
         </div>
-        <button type="submit">Submit</button>
+        <button className="btn btn--primary" type="submit">Submit</button>
       </form>
     )
 }
