@@ -1,43 +1,37 @@
 import React, { Component } from 'react';
+import CommentList from './CommentList';
+import LoadingIndicator from './LoadingIndicator'
+import { fetchComments } from '../actions'
 import { connect } from 'react-redux';
 
-import { fetchPosts } from '../actions'
-import PostList from './PostList'
-import LoadingIndicator from './LoadingIndicator'
-
 class CommentListContainer extends Component {
-
-  componentDidMount() {
-    return this.props.dispatch(fetchPosts());
+  componentWillMount() {
+    this.props.dispatch(fetchComments(this.props.id));
   }
-
-  renderPostsOrLoadingIndicator() {
-    if(this.props.postList.isFetching) {
-      return <LoadingIndicator />
+  
+  renderCommentsOrLoadingIndicator() {
+    console.log(this.props.comments);
+    if(this.props.comments.isFetching) {
+        return <LoadingIndicator />
     }
-    if(this.props.postList.length > 0) {
-      return <PostList postList={this.props.postList}/>
+
+    if(this.props.comments.items.length > 0) {
+      return <CommentList comments={this.props.comments} />
     }
   }
 
   render() {
     return(
       <div>
-        {this.renderPostsOrLoadingIndicator()}
+        {this.renderCommentsOrLoadingIndicator()}
       </div>
     )
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  function filterPosts() {
-    if(state.posts.items.length > 0) {
-      return state.posts.items.filter(post => post.category === ownProps.match.params.category)
-    }
-    return state.posts;
-  }
+function mapStateToProps(state) {
   return {
-    postList: filterPosts(),
+    comments: state.comments,
   }
 }
 
