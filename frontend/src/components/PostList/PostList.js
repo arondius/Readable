@@ -1,5 +1,5 @@
 import React from 'react'
-import PostPreview from './PostPreview';
+import PostPreview from '../PostPreview'
 
 const PostList = (props) => (
   <ul className="postlist">
@@ -14,4 +14,4 @@ const PostList = (props) => (
   </ul>
 )
 
-export default PostList;
+export default  PostList;

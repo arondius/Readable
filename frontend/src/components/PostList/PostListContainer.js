@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchPosts } from '../actions'
+import { fetchPosts } from '../../actions'
+
 import PostList from './PostList'
-import LoadingIndicator from './LoadingIndicator'
+import LoadingIndicator from '../LoadingIndicator'
 
 class PostListContainer extends Component {
 
@@ -12,7 +13,6 @@ class PostListContainer extends Component {
   }
 
   renderPostsOrLoadingIndicator() {
-    console.log('this.props.postList', this.props.postList);
     if(this.props.postList.isFetching) {
       return <LoadingIndicator />
     }

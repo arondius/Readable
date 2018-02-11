@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CommentList from './CommentList';
-import LoadingIndicator from './LoadingIndicator'
-import { fetchComments } from '../actions'
+import LoadingIndicator from '../LoadingIndicator'
+import { fetchComments } from '../../actions'
 import { connect } from 'react-redux';
 
 class CommentListContainer extends Component {

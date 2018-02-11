@@ -1,5 +1,5 @@
 import React from 'react';
-import VoteWidget from './VoteWidget'
+import VoteWidget from '../VoteWidget'
 
 const Comment = (props) => {
   return(

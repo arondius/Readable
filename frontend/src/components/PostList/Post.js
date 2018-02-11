@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {togglePostForm} from '../actions'
-import PostFormContainer from './PostFormContainer'
-import VoteWidget from './VoteWidget'
+import {togglePostForm} from '../../actions'
+import PostFormContainer from '../PostFormContainer'
+import VoteWidget from '../VoteWidget'
 
 class Post extends Component {  
 

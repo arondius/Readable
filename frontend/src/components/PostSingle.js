@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import Post from './Post';
-import CommentListContainer from './CommentListContainer'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import CommentListContainer from './CommentList/CommentListContainer'
 import LoadingIndicator from './LoadingIndicator'
-import Sidebar from './Sidebar.js'
+import Post from './PostList/Post';
 import PostFormContainer from './PostFormContainer'
+import Sidebar from './Sidebar.js'
 
 class PostSingle extends Component {
   renderPostsOrLoadingIndicator() {
