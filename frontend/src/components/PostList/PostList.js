@@ -14,4 +14,4 @@ const PostList = (props) => (
   </ul>
 )
 
-export default  PostList;
+export default PostList;
