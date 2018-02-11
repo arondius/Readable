@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 const Sidebar = props => {
     return(
-      <div class="sidebar">
+      <div className="sidebar">
         {props.children}
       </div>
     )
