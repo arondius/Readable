@@ -10,12 +10,11 @@ class CommentListContainer extends Component {
   }
   
   renderCommentsOrLoadingIndicator() {
-    console.log(this.props.comments);
-    if(this.props.comments.isFetching) {
+    if(this.props.isFetching) {
         return <LoadingIndicator />
     }
 
-    if(this.props.comments.items.length > 0) {
+    if(this.props.comments.length > 0) {
       return <CommentList comments={this.props.comments} />
     }
   }
@@ -31,7 +30,8 @@ class CommentListContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    comments: state.comments,
+    comments: state.comments.items,
+    isFetching: state.comments.isFetching
   }
 }
 
