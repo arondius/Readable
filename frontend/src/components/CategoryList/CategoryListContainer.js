@@ -16,7 +16,7 @@ class CategoryListContainer extends Component {
 
   renderPostsOrLoadingIndicator() {
     if(this.props.isFetching) {
-      
+      return <LoadingIndicator />
     }
     if(this.props.posts.length > 0) {
       return <PostList posts={this.props.posts}/>
