@@ -2,15 +2,13 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 let PostForm = props => {
-    const mode = props.mode;
-    const modeCapitalized = mode.charAt(0).toUpperCase() + mode.slice(1); 
     const { handleSubmit } = props;
     return(
       <form 
         className="create-post__container"
         onSubmit={handleSubmit}
       >
-        <h2>{`${modeCapitalized}`} post</h2>
+        <h2>Add post</h2>
 
         <div>
           <label htmlFor="postTitle">Post title</label>
@@ -53,6 +51,6 @@ let PostForm = props => {
     )
 }
 
-PostForm = reduxForm({})(PostForm)
+PostForm = reduxForm()(PostForm)
 
 export default PostForm;
