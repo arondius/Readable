@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import CommentListContainer from './CommentList/CommentListContainer'
 import LoadingIndicator from './LoadingIndicator'
 import Post from './PostList/Post';
-import PostFormContainer from './PostFormContainer'
 import Sidebar from './Sidebar.js'
 
 class PostSingle extends Component {
@@ -14,9 +13,9 @@ class PostSingle extends Component {
         return <LoadingIndicator />
     }
 
-    if(this.props.postList.length > 0) {
+    if(this.props.post) {
       return(
-        <Post post={this.props.postList} />
+        <Post post={this.props.post} />
       )
     }
   }
@@ -33,13 +32,6 @@ class PostSingle extends Component {
         {this.renderPostsOrLoadingIndicator()}
         <h2>Comments</h2>
         <CommentListContainer id={this.props.match.params.id} CommentList={this.props.CommentList}/>
-        <Sidebar>
-          <PostFormContainer
-            mode="add"
-            post={null}
-            id="addPost"
-          />
-        </Sidebar>
       </div>
     )
   }
@@ -48,7 +40,7 @@ class PostSingle extends Component {
 function mapStateToProps(state, ownProps) {
   console.log(state, ownProps);
   return {
-    postList: state.posts.items.filter((post) => (post.id === ownProps.match.params.id))[0],
+    post: state.posts.items.filter((post) => (post.id === ownProps.match.params.id))[0],
     isFetching: state.posts.isFetching,
     CommentList: state.comments.items.filter((comment) => (comment.parentId === ownProps.match.params.id))
   }

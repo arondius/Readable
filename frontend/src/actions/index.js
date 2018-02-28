@@ -1,23 +1,26 @@
 const url = 'http://localhost:3001/'
 
+const myHeaders = new Headers({
+  'Authorization': '1234',
+  'Content-Type': 'application/json'
+});
+
 // Post action creators
 export const REQUEST_POSTS = 'REQUEST_POSTS';
-export const requestPosts = (category) => ({
+export const requestPosts = () => ({
   type: REQUEST_POSTS,
-  category
 })
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
-export const receivePosts = (category, json) => ({
+export const receivePosts = (json) => ({
   type: RECEIVE_POSTS,
-  category,
   posts: json,
   receivedAt: Date.now
 })
 
-export function fetchPosts(category = null) {
+export function fetchPosts() {
   return function(dispatch) {
-    dispatch(requestPosts(category))
+    dispatch(requestPosts())
     
     const myHeaders = new Headers({
       'Authorization': '1234'
@@ -27,15 +30,22 @@ export function fetchPosts(category = null) {
       headers: myHeaders,
     }
     
-    const requetsUrl = category ? `${url}${category}/posts` : `${url}posts`
+    const requetsUrl = `${url}posts`
     const myRequest = new Request(requetsUrl, myInit);
     return fetch(myRequest)
     .then(
       response => response.json(), error => console.log('An error occured: ', error)
     )
-    .then(json => dispatch(receivePosts(category, json)))
+    .then(json => dispatch(receivePosts(json)))
   }
 }
+
+// Category  creators
+export const GET_POSTS_IN_CATEGORY = 'GET_POSTS_IN_CATEGORY'
+export const getPostsInCategory = (category) => ({
+  type: GET_POSTS_IN_CATEGORY,
+  category
+})
 
 export const REQUEST_SAVE_POST = 'REQUEST_SAVE_POST';
 export const requestSavePost = (id, title, body, author, category, timestamp) => ({
@@ -53,12 +63,7 @@ export function savePost(id, title, body, author, category, timestamp) {
     dispatch(requestSavePost(id, title, body, author, category, timestamp))
     
     const data = {id, title, body, author, category, timestamp}
-    
-    const myHeaders = new Headers({
-      'Authorization': '1234',
-      'Content-Type': 'application/json'
-    });
-    
+        
     const myInit = {
       method: 'POST',
       body: JSON.stringify(data),
@@ -95,11 +100,41 @@ export const deletePost = (id) => ({
   id
 })
 
-export const UPDATE_POST = 'UPDATE_POST';
-export const updatePost = (id) => ({
-  type: UPDATE_POST,
+export const REQUEST_UPDATE_POST = 'REQUEST_UPDATE_POST';
+export const requestUpdatePost = (id) => ({
+  type: REQUEST_UPDATE_POST,
   id
 })
+
+
+export const RECEIVE_UPDATE_POST = 'RECEIVE_UPDATE_POST';
+export const receiveUpdatePost = (id, json) => ({
+  type: RECEIVE_UPDATE_POST,
+  id,
+  json
+})
+
+export function updatePost(id, title, body) {
+  return function(dispatch) {
+    dispatch(requestUpdatePost(id));
+    
+    const data = {id, title, body}
+    
+    const myInit = {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      headers: myHeaders,
+    }
+    
+    const requetsUrl = `${url}posts/${id}`
+    const myRequest = new Request(requetsUrl, myInit);
+    return fetch(myRequest)
+    .then(
+      response => console.log(response.json()), error => console.log('An error occured: ', error)
+    )
+    .then(() => dispatch(fetchPosts(null)))
+  }
+}
 
 // Comments action creators
 export const REQUEST_COMMENTS = 'REQUEST_COMMENTS';
@@ -174,12 +209,7 @@ export function vote(id, option, type) {
   return function(dispatch) {
     const voteOption = option === 'upvote' ? requestUpVote(id) : requestDownVote(id);
     dispatch(voteOption);
-    
-    const myHeaders = new Headers({
-      'Authorization': '1234',
-      'Content-Type': 'application/json'
-    });
-    
+        
     const data = {option}
     const myInit = {
       method: 'POST',
@@ -197,13 +227,6 @@ export function vote(id, option, type) {
     .then(() => {return dispatch(fetchPosts(null)); return dispatch(fetchComments(null))})
   }
 }
-
-// Category ADD_COMMENTion creators
-export const SELECT_CATEGORY = 'SELECT_CATEGORY'
-export const selectCategory = (category) => ({
-  type: SELECT_CATEGORY,
-  category
-})
 
 export const TOGGLE_POST_FORM = 'TOGGLE_POST_FORM'
 export const togglePostForm = (id, mode) => ({

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-import VoteWidget from './VoteWidget'
+import VoteWidget from '../VoteWidget'
 
 class PostPreview extends Component {  
 

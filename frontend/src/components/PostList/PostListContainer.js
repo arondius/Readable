@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { fetchPosts } from '../../actions'
 
+import Sidebar from '../Sidebar'
 import PostList from './PostList'
+import PostAddFormContainer from '../PostAddFormContainer.js'
 import LoadingIndicator from '../LoadingIndicator'
 
 class PostListContainer extends Component {
 
-  componentDidMount() {
-    return this.props.dispatch(fetchPosts());
-  }
-
   renderPostsOrLoadingIndicator() {
-    if(this.props.postList.isFetching) {
+    if(this.props.isFetching) {
       return <LoadingIndicator />
-    }
-    if(this.props.postList.items.length > 0) {
-      return <PostList postList={this.props.postList.items}/>
+    } else {
+      return <PostList posts={this.props.posts}/>
     }
   }
 
@@ -32,7 +30,8 @@ class PostListContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    postList: state.posts,
+    posts: state.posts.items,
+    isFetching: state.posts.isFetching
   }
 }
 

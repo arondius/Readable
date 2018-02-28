@@ -7,7 +7,8 @@ import {
   // REQUEST_POST,
   REQUEST_SAVE_POST,
   DELETE_POST,
-  UPDATE_POST,
+  REQUEST_UPDATE_POST,
+  RECEIVE_UPDATE_POST,
   REQUEST_COMMENTS,
   RECEIVE_COMMENTS,
   ADD_COMMENT,
@@ -16,7 +17,8 @@ import {
   TOGGLE_POST_FORM,
   CLOSE_POST_FORM,
   REQUEST_UP_VOTE,
-  REQUEST_DOWN_VOTE
+  REQUEST_DOWN_VOTE,
+  GET_POSTS_IN_CATEGORY
 } from '../actions'
 
 function removeByKey(myObject, deleteKey) {
@@ -54,7 +56,7 @@ function posts(state = defaultPostsState, action) {
         };
     case DELETE_POST:
       return removeByKey(state, action.id);
-    case UPDATE_POST:
+    case REQUEST_UPDATE_POST:
       return state;
     case REQUEST_UP_VOTE:
     case REQUEST_DOWN_VOTE:
