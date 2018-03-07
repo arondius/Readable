@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { fetchPosts, getPostsInCategory } from '../../actions'
 
+import Container from '../Container'
 import Sidebar from '../Sidebar'
 import LoadingIndicator from '../LoadingIndicator'
 import PostList from '../PostList/PostList'
@@ -22,12 +23,12 @@ class CategoryListContainer extends Component {
       return <PostList posts={this.props.posts}/>
     } else {
       return(
-        <div className="container">
+        <Container>
           <div className="content">
             No posts were found!<br />
-              <Link to="/">Back home</Link>
-            </div>
-        </div>
+            <Link to="/">Back home</Link>
+          </div>
+        </Container>
       )
     }
   }

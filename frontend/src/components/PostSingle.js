@@ -6,6 +6,7 @@ import CommentListContainer from './CommentList/CommentListContainer'
 import LoadingIndicator from './LoadingIndicator'
 import Post from './PostList/Post';
 import Sidebar from './Sidebar.js'
+import Container from './Container'
 
 class PostSingle extends Component {
   renderPostsOrLoadingIndicator() {
@@ -22,17 +23,22 @@ class PostSingle extends Component {
   
   render() {
     return(
-      <div>
-        <h3>
-          <Link to="/">
-            <i className="fas fa-arrow-circle-left heading-icon heading-icon--left"></i>
-            Back to the list of Posts
-          </Link>
-        </h3>
-        {this.renderPostsOrLoadingIndicator()}
-        <h2>Comments</h2>
-        <CommentListContainer id={this.props.match.params.id} CommentList={this.props.CommentList}/>
-      </div>
+      <Container>
+        <div className="content">
+          <h3>
+            <Link to="/">
+              <i className="fas fa-arrow-circle-left heading-icon heading-icon--left"></i>
+              Back to the list of Posts
+            </Link>
+          </h3>
+          {this.renderPostsOrLoadingIndicator()}
+          <h2>Comments</h2>
+          <CommentListContainer 
+            id={this.props.match.params.id}
+            CommentList={this.props.CommentList}
+          />
+        </div>
+      </Container>
     )
   }
 }
