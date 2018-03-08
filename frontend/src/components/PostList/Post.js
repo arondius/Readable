@@ -8,6 +8,7 @@ class Post extends Component {
 
   render() {
     const {id, postEditForm} = this.props.post
+    const postDate = new Date(this.props.post.timestamp);
     const postValues = {
       postTitle: this.props.post.title,
       postBody: this.props.post.body,
@@ -20,6 +21,7 @@ class Post extends Component {
         <p>{this.props.post.body}</p>
         <p>{this.props.post.author}</p>
         <p>{this.props.post.category}</p>
+        <p>Posted on: {postDate.toDateString()}</p>
 
         <VoteWidget 
           id={this.props.post.id}

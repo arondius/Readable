@@ -6,6 +6,7 @@ import VoteWidget from '../VoteWidget'
 class PostPreview extends Component {  
 
   render() {
+    const postDate = new Date(this.props.post.timestamp);
     return(
       <div>
         <h1>
@@ -16,6 +17,7 @@ class PostPreview extends Component {
         </h1>
         <p>Author: {this.props.post.author}</p>
         <p>Category: {this.props.post.category}</p>
+        <p>Posted on: {postDate.toDateString()}</p>
         <VoteWidget id={this.props.post.id} type="posts" voteScore={this.props.post.voteScore} />
         <Link className="btn btn--primary" to={`/post/${this.props.post.id}`}>View Post</Link>
       </div>
