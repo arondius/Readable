@@ -94,11 +94,38 @@ export const addPost = (id, title, body) => ({
   body
 })
 
-export const DELETE_POST = 'DELETE_POST';
-export const deletePost = (id) => ({
-  type: DELETE_POST,
+export const REQUEST_DELETE_POST = 'REQUEST_DELETE_POST';
+export const requestDeletePost = () => ({
+  type: REQUEST_DELETE_POST,
+})
+
+export const RECEIVE_DELETE_POST = 'RECEIVE_DELETE_POST';
+export const receiveDeletePost = (id) => ({
+  type: RECEIVE_DELETE_POST,
   id
 })
+
+export const DELETE_POST = 'DELETE_POST';
+export function deletePost(id) {
+  return function(dispatch) {
+    dispatch(requestDeletePost());
+    const data = {id}
+        
+    const myInit = {
+      method: 'DELETE',
+      body: JSON.stringify(data),
+      headers: myHeaders,
+    }
+    
+    const requetsUrl = `${url}posts/${id}`
+    const myRequest = new Request(requetsUrl, myInit);
+    return fetch(myRequest)
+    .then(
+      response => console.log(response.json()), error => console.log('An error occured: ', error)
+    )
+    .then((json) => dispatch(receiveDeletePost(id)))
+  }
+}
 
 export const REQUEST_UPDATE_POST = 'REQUEST_UPDATE_POST';
 export const requestUpdatePost = (id) => ({

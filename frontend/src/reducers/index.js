@@ -4,9 +4,10 @@ import { reducer as formReducer } from 'redux-form'
 import { 
   REQUEST_POSTS,
   RECEIVE_POSTS,
-  // REQUEST_POST,
   REQUEST_SAVE_POST,
-  DELETE_POST,
+  DELETE_POSTRECEIVE_,
+  REQUEST_DELETE_POST,
+  RECEIVE_DELETE_POST,
   REQUEST_UPDATE_POST,
   RECEIVE_UPDATE_POST,
   REQUEST_COMMENTS,
@@ -71,8 +72,13 @@ function posts(state = defaultPostsState, action) {
         ...state,
           isFetching: true
         };
-    case DELETE_POST:
-      return removeByKey(state, action.id);
+    case RECEIVE_DELETE_POST:
+      return {
+        ...state,
+        items: [
+          ...state.items.filter( (item) => item.id !== action.id )
+        ]
+      }
     case REQUEST_UPDATE_POST:
       return state;
       case SORT_POSTS:
