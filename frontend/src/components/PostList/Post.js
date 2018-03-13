@@ -41,17 +41,6 @@ class Post extends Component {
 
 const mapStateToProps = (state) => ({
     posts: state.posts,
-    postEditForm: state.postEditForm
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  dispatch,
-  toggleAddPostClick(id) {
-    dispatch(togglePostForm(id, "add"))
-  },
-  toggleEditPostClick(id) {
-    dispatch(togglePostForm(id, "edit"))
-  }
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Post);
+export default connect(mapStateToProps)(Post);

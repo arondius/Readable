@@ -19,6 +19,7 @@ import {
   REQUEST_UP_VOTE,
   REQUEST_DOWN_VOTE,
   GET_POSTS_IN_CATEGORY
+  SORT_POSTS
 } from '../actions'
 
 function removeByKey(myObject, deleteKey) {
@@ -29,6 +30,21 @@ function removeByKey(myObject, deleteKey) {
       result[current] = myObject[current];
       return result;
     }, {});
+}
+
+function sortByKey(array, key, direction = "up") {
+    const newArray = array.slice();
+    return newArray.sort(function(a, b) {
+        var x = a[key];
+        var y = b[key];
+        if(direction === "down") {
+          console.log('down', ((x < y) ? -1 : ((x > y) ? 1 : 0)));
+          return x - y;
+        } else if (direction === "up") {
+          console.log('up', ((x < y) ? -1 : ((x > y) ? 0 : 1)));
+          return y - x;
+        }
+    });
 }
 
 const defaultPostsState = {
@@ -58,6 +74,33 @@ function posts(state = defaultPostsState, action) {
       return removeByKey(state, action.id);
     case REQUEST_UPDATE_POST:
       return state;
+      case SORT_POSTS:
+        switch(action.method) {
+          case "dateUp":
+            return {
+              ...state,
+              items: sortByKey(action.items, "timestamp", "up")
+            };
+          break;
+          case "dateDown":
+            return {
+              ...state,
+              items: sortByKey(action.items, "timestamp", "down")
+            };
+          break;
+          case "populairUp":
+            return {
+              ...state,
+              items: sortByKey(action.items, "voteScore")
+            };
+          break;
+          case "popularDown":
+            return {
+              ...state,
+              items: sortByKey(action.items, "voteScore", "down")
+            };
+          break;
+        }
     case REQUEST_UP_VOTE:
     case REQUEST_DOWN_VOTE:
       return {

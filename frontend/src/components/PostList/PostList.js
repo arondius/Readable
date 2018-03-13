@@ -1,21 +1,32 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PostPreview from './PostPreview'
+import {connect} from 'react-redux'
+
+import {sortPosts} from '../../actions'
+
 
 import Container from '../Container'
 import PostAddFormContainer from '../PostAddFormContainer'
 import Sidebar from '../Sidebar'
 import {Link} from 'react-router-dom'
 
-const PostList = (props) => (
+class PostList extends Component {
   
+  render() {
+    return(
     <Container>
       <div className="content">
+        <span>Sort</span>
+        <button className="btn" onClick={() => this.props.dispatch(sortPosts('dateUp', this.props.posts))}>Newest first</button>
+        <button className="btn" onClick={() => this.props.dispatch(sortPosts('dateDown', this.props.posts))}>Oldest first</button>
+        <button className="btn" onClick={() => this.props.dispatch(sortPosts('populairUp', this.props.posts))}>Popular</button>
+        <button className="btn" onClick={() => this.props.dispatch(sortPosts('popularDown', this.props.posts))}>Unpopulair</button>
         <ul className="postlist">
           {
-            props.posts.length > 0 ? props.posts.map(
+            this.props.posts.length > 0 ? this.props.posts.map(
               post => 
                 <li key={post.id}>
-                  <PostPreview post={post} location={props.location} />
+                  <PostPreview post={post} location={this.props.location} />
                 </li>
             ) : <li>No posts available</li>
           }
@@ -37,6 +48,8 @@ const PostList = (props) => (
         <PostAddFormContainer />
       </Sidebar>
     </Container>
-)
+  )
+}
+}
 
-export default PostList;
+export default connect()(PostList);

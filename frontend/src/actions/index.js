@@ -240,3 +240,10 @@ export const closePostForm = (id) => ({
   type: CLOSE_POST_FORM,
   id
 })
+
+export const SORT_POSTS = 'SORT_POSTS'
+export const sortPosts = (method, items) => ({
+  type: SORT_POSTS,
+  method,
+  items
+})
