@@ -18,7 +18,8 @@ import {
   CLOSE_POST_FORM,
   REQUEST_UP_VOTE,
   REQUEST_DOWN_VOTE,
-  GET_POSTS_IN_CATEGORY
+  RECEIVE_VOTE,
+  GET_POSTS_IN_CATEGORY,
   SORT_POSTS
 } from '../actions'
 
@@ -106,6 +107,25 @@ function posts(state = defaultPostsState, action) {
       return {
         ...state,
         isFetching: true
+      }
+    case RECEIVE_VOTE:
+      return {
+        ...state,
+        isFetching: false,
+        items: [
+          ...state.items.map( (item, index) => {
+            if(item["id"] !== action.id) {
+              return item
+            }
+            
+            console.log('action.voteScore', action.voteScore);
+            item["voteScore"] = action.voteScore
+            console.log('item["voteScore"]', item["voteScore"]);
+            return {
+              ...item
+            }
+          })
+        ]
       }
     default:
       return state;

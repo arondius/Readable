@@ -204,6 +204,13 @@ export const requestDownVote = (id) => ({
   id
 })
 
+export const RECEIVE_VOTE = 'RECEIVE_VOTE';
+export const receiveVote = (id, voteScore) => ({
+  type: RECEIVE_VOTE,
+  id,
+  voteScore
+})
+
 export function vote(id, option, type) {
   console.log('id, option, type', id, option, type);
   return function(dispatch) {
@@ -224,7 +231,11 @@ export function vote(id, option, type) {
     .then(
       response => response.json(), error => console.log('An error occured: ', error)
     )
-    .then(() => {return dispatch(fetchPosts(null)); return dispatch(fetchComments(null))})
+    .then(
+      (json) => {
+        return dispatch(receiveVote(id, json.voteScore));
+      }
+    )
   }
 }
 
