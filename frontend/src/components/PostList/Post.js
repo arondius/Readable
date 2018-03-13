@@ -4,7 +4,7 @@ import {togglePostForm} from '../../actions'
 import PostEditFormContainer from '../PostEditFormContainer'
 import VoteWidget from '../VoteWidget'
 
-class Post extends Component {  
+class Post extends Component {
 
   render() {
     const {id, postEditForm} = this.props.post
@@ -19,8 +19,8 @@ class Post extends Component {
       <div>
         <h1>{this.props.post.title}</h1>
         <p>{this.props.post.body}</p>
-        <p>{this.props.post.author}</p>
-        <p>{this.props.post.category}</p>
+        <p>Author: {this.props.post.author}</p>
+        <p>Category: {this.props.post.category}</p>
         <p>Posted on: {postDate.toDateString()}</p>
 
         <VoteWidget 
