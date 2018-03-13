@@ -9,20 +9,16 @@ import PostList from './PostList'
 import PostAddFormContainer from '../PostAddFormContainer.js'
 import LoadingIndicator from '../LoadingIndicator'
 
-class PostListContainer extends Component {
 
-  renderPostsOrLoadingIndicator() {
-    if(this.props.isFetching) {
-      return <LoadingIndicator />
-    } else {
-      return <PostList posts={this.props.posts}/>
-    }
-  }
+class PostListContainer extends Component {
 
   render() {
     return(
       <div>
-        {this.renderPostsOrLoadingIndicator()}
+        {this.props.isFetching ? 
+          <LoadingIndicator /> : 
+          <PostList posts={this.props.posts}/>
+        }
       </div>
     )
   }
