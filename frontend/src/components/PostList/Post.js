@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {togglePostForm} from '../../actions'
+import {togglePostForm, deletePost} from '../../actions'
 import PostEditFormContainer from '../PostEditFormContainer'
 import VoteWidget from '../VoteWidget'
 
@@ -24,6 +24,7 @@ class Post extends Component {
         <p>Posted on: {postDate.toDateString()}</p>
         <p># of Comments: {this.props.post.commentCount}</p>
 
+        <button className="btn" onClick={() => this.props.dispatch(deletePost(this.props.post.id))}>Delete post</button>
         <VoteWidget 
           id={this.props.post.id}
           type="posts"
