@@ -22,6 +22,7 @@ class Post extends Component {
         <p>Author: {this.props.post.author}</p>
         <p>Category: {this.props.post.category}</p>
         <p>Posted on: {postDate.toDateString()}</p>
+        <p># of Comments: {this.props.post.commentCount}</p>
 
         <VoteWidget 
           id={this.props.post.id}
