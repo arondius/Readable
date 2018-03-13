@@ -16,9 +16,9 @@ class PostList extends Component {
     return(
     <Container>
       <div className="content">
-        <span>Sort</span>
-        <button className="btn" onClick={() => this.props.dispatch(sortPosts('dateUp', this.props.posts))}>Newest first</button>
-        <button className="btn" onClick={() => this.props.dispatch(sortPosts('dateDown', this.props.posts))}>Oldest first</button>
+        <div>Sort by:</div>
+        <button className="btn" onClick={() => this.props.dispatch(sortPosts('dateUp', this.props.posts))}>Newest</button>
+        <button className="btn" onClick={() => this.props.dispatch(sortPosts('dateDown', this.props.posts))}>Oldest</button>
         <button className="btn" onClick={() => this.props.dispatch(sortPosts('populairUp', this.props.posts))}>Popular</button>
         <button className="btn" onClick={() => this.props.dispatch(sortPosts('popularDown', this.props.posts))}>Unpopulair</button>
         <ul className="postlist">
