@@ -35,15 +35,12 @@ class CategoryListContainer extends Component {
 
   render() {
     return(
-      <div>
-        {this.renderPostsOrLoadingIndicator()}
-      </div>
+        this.renderPostsOrLoadingIndicator()
     )
   }
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log(state);
   return {
     posts: state.posts.items.filter((post) => post.category === ownProps.match.params.category),
     isFetching: state.posts.isFetching,
