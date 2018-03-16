@@ -57,6 +57,10 @@ const defaultPostsState = {
 function posts(state = defaultPostsState, action) {
   switch(action.type) {
     case REQUEST_POSTS:
+    case REQUEST_UPDATE_POST:
+    case REQUEST_SAVE_POST:
+    case REQUEST_UP_VOTE:
+    case REQUEST_DOWN_VOTE:
       return {
         ...state,
           isFetching: true
@@ -67,11 +71,12 @@ function posts(state = defaultPostsState, action) {
           isFetching: false,
           items: action.posts
       };
-    case REQUEST_SAVE_POST:
+    case RECEIVE_UPDATE_POST:
       return {
         ...state,
-          isFetching: true
-        };
+        items: updateObjectInArray(state.items, action),
+        isFetching: false
+      }
     case RECEIVE_DELETE_POST:
       return {
         ...state,
@@ -79,8 +84,6 @@ function posts(state = defaultPostsState, action) {
           ...state.items.filter( (item) => item.id !== action.id )
         ]
       }
-    case REQUEST_UPDATE_POST:
-      return state;
       case SORT_POSTS:
         switch(action.method) {
           case "dateUp":
@@ -108,11 +111,6 @@ function posts(state = defaultPostsState, action) {
             };
           break;
         }
-    case REQUEST_UP_VOTE:
-    case REQUEST_DOWN_VOTE:
-      return {
-        ...state,
-        isFetching: true
       }
     case RECEIVE_VOTE:
       return {
@@ -145,28 +143,19 @@ const defaultCommentsState = {
 
 function comments(state = defaultCommentsState, action) {
   switch(action.type) {
-    
-    case ADD_COMMENT:
-      return state;
-    case DELETE_COMMENT:
-      return state;
-    case UPDATE_COMMENT:
-      return state;
     case REQUEST_COMMENTS:
+    case REQUEST_UPDATE_COMMENT:
+    case REQUEST_UP_VOTE:
+    case REQUEST_DOWN_VOTE:
+    return {
+      ...state,
+      isFetching: true
+    };
       return {
         ...state,
-        isFetching: true
-      };
-    case RECEIVE_COMMENTS:
       return {
         ...state,
         isFetching: false,
-        items: action.comments
-      };
-    // case UPP_VOTE:
-    //   return state;
-    // case DOWN_VOTE:
-    //   return state;
     default:
       return state;
   }
