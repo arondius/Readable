@@ -157,6 +157,12 @@ function comments(state = defaultCommentsState, action) {
       ...state,
       isFetching: true
     };
+    case RECEIVE_COMMENTS:
+    return {
+      ...state,
+      isFetching: false,
+      items: action.comments
+    };
     case RECEIVE_DELETE_COMMENT:
       return {
         ...state,
