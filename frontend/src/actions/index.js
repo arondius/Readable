@@ -324,10 +324,9 @@ export function vote(id, option, type) {
 }
 
 export const TOGGLE_POST_FORM = 'TOGGLE_POST_FORM'
-export const togglePostForm = (id, mode) => ({
+export const togglePostForm = (id) => ({
   type: TOGGLE_POST_FORM,
   id,
-  mode
 })
 
 export const CLOSE_POST_FORM = 'CLOSE_POST_FORM'
