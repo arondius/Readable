@@ -30,7 +30,7 @@ class CommentListContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    comments: state.comments.items,
+    comments: state.comments.items.filter((comment) => (comment.deleted === false && comment.parentDeleted == false)),
     isFetching: state.comments.isFetching
   }
 }

@@ -13,6 +13,7 @@ import {
   REQUEST_COMMENTS,
   RECEIVE_COMMENTS,
   ADD_COMMENT,
+  RECEIVE_DELETE_COMMENT,
   DELETE_COMMENT,
   UPDATE_COMMENT,
   TOGGLE_POST_FORM,
@@ -151,6 +152,13 @@ function comments(state = defaultCommentsState, action) {
       ...state,
       isFetching: true
     };
+    case RECEIVE_DELETE_COMMENT:
+      return {
+        ...state,
+        items: [
+          ...state.items.filter( (item) => item.id !== action.id )
+        ]
+      }
       return {
         ...state,
       return {

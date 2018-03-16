@@ -200,15 +200,42 @@ export const addComment = (id) => ({
   id
 })
 
-export const DELETE_COMMENT = 'DELETE_COMMENT';
-export const deleteComment = (id) => ({
-  type: DELETE_COMMENT,
+export const REQUEST_DELETE_COMMENT = 'REQUEST_DELETE_COMMENT';
+export const requestDeleteComment = (id) => ({
+  type: REQUEST_DELETE_COMMENT,
+  id
+})
+
+export const RECEIVE_DELETE_COMMENT = 'RECEIVE_DELETE_COMMENT';
+export const receiveDeleteComment = (id) => ({
+  type: RECEIVE_DELETE_COMMENT,
   id
 })
 
 export const UPDATE_COMMENT = 'UPDATE_COMMENT';
 export const updateComment = (id) => ({
   type: UPDATE_COMMENT,
+export function deleteComment(id = null) {
+  return function(dispatch) {
+    dispatch(requestDeleteComment(id));
+    const data = {id}
+        
+    const myInit = {
+      method: 'DELETE',
+      body: JSON.stringify(data),
+      headers: myHeaders,
+    }
+    
+    const requetsUrl = `${url}comments/${id}`
+    const myRequest = new Request(requetsUrl, myInit);
+    return fetch(myRequest)
+    .then(
+      response => response.json(), error => console.log('An error occured: ', error)
+    )
+    .then((json) => dispatch(receiveDeleteComment(id)))
+  }
+}
+
   id
 })
 
