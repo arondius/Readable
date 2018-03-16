@@ -22,9 +22,14 @@ class PostAddFormContainer extends Component {
       <PostAddForm
         form="addPostForm"
         onSubmit={this.submit}
+        categories={this.props.categories}
       />
     )
   }
 }
 
-export default connect()(PostAddFormContainer);
+export default connect(function mapStateToProps(state) {
+  return {
+    categories: state.categories.items
+  }
+})(PostAddFormContainer);

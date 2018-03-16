@@ -40,10 +40,10 @@ let PostForm = props => {
             name="postCategory"
             component="select"
           >
-            <option />
-            <option value="React">React</option>
-            <option value="Redux">Redux</option>
-            <option value="Udacity">Udacity</option>
+            <option>Select category</option>
+            {props.categories.map((category) => (
+              <option key={category.path} value={category.path}>{category.name}</option>
+            ))}
           </Field>
         </div>
         <button className="btn btn--primary" type="submit">Submit</button>
