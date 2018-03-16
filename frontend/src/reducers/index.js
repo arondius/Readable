@@ -9,6 +9,7 @@ import {
   REQUEST_DELETE_POST,
   RECEIVE_DELETE_POST,
   REQUEST_UPDATE_POST,
+  RECEIVE_DELETE_POST,
   RECEIVE_UPDATE_POST,
   REQUEST_COMMENTS,
   RECEIVE_COMMENTS,
@@ -207,9 +208,20 @@ function comments(state = defaultCommentsState, action) {
           })
         ]
       }
+    // Setting parentDeleted flag to true when post is deleted 
+    case RECEIVE_DELETE_POST:
       return {
         ...state,
         isFetching: false,
+        items: [
+          ...state.items.filter( (item) => {
+            if(item.parentId !== action.id) {
+              return item;
+            }
+          }
+          )
+        ]
+      }
     case RECEIVE_UPDATE_COMMENT:
       return {
         ...state,
