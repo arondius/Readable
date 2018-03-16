@@ -21,10 +21,7 @@ export const receivePosts = (json) => ({
 export function fetchPosts() {
   return function(dispatch) {
     dispatch(requestPosts())
-    
-    const myHeaders = new Headers({
-      'Authorization': '1234'
-    });
+
     const myInit = {
       method: 'GET',
       headers: myHeaders,
@@ -181,10 +178,7 @@ export const receiveComments = (id, json) => ({
 export function fetchComments(postId = null) {
   return function(dispatch) {
     dispatch(requestComments(postId))
-    
-    const myHeaders = new Headers({
-      'Authorization': '1234'
-    });
+
     const myInit = {
       method: 'GET',
       headers: myHeaders,
