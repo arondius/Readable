@@ -21,6 +21,8 @@ import {
   REQUEST_DOWN_VOTE,
   RECEIVE_VOTE,
   GET_POSTS_IN_CATEGORY,
+  REQUEST_CATEGORIES,
+  RECEIVE_CATEGORIES,
   SORT_POSTS
 } from '../actions'
 
@@ -138,6 +140,31 @@ function posts(state = defaultPostsState, action) {
   }
 }
 
+const defaultCategoriesState = {
+  isFetching: false,
+  items: []
+}
+
+function categories(state = defaultCategoriesState, action) {
+  switch(action.type) {
+    case REQUEST_CATEGORIES:
+      return {
+        ...state,
+        isFetching: true
+      };
+    case RECEIVE_CATEGORIES:
+      return {
+        ...state,
+        bla: console.log(action),
+        items: [
+          ...action.categories.categories
+        ]
+      };
+    default:
+      return state;
+  }
+}
+
 const defaultCommentsState = {
   isFetching: false,
   items: []
@@ -236,5 +263,5 @@ function postEditForm(state = defaultpostEditState, action) {
 }
 
 export default combineReducers({
-    posts, comments, postEditForm, form: formReducer
+    posts, comments, postEditForm, categories, form: formReducer
 });
