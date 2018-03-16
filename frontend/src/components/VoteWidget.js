@@ -6,7 +6,7 @@ class VoteWidget extends Component {
   render() {
     return(
       <div className="vote-widget__container">
-        <p className="vote-widget__votes">votes: {this.props.voteScore}</p>
+        <p className="vote-widget__votes">vote score: {this.props.voteScore}</p>
         <div className="vote-widget__vote-btn-container">
           <button 
             className="btn vote-widget__vote-btn vote-widget__vote-btn--up"
