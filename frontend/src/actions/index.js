@@ -154,7 +154,7 @@ export function updatePost(id, title, body) {
     const myRequest = new Request(requetsUrl, myInit);
     return fetch(myRequest)
     .then(
-      response => console.log(response.json()), error => console.log('An error occured: ', error)
+      response => response.json(), error => console.log('An error occured: ', error)
     )
     .then(() => dispatch(fetchPosts(null)))
   }
@@ -212,9 +212,6 @@ export const receiveDeleteComment = (id) => ({
   id
 })
 
-export const UPDATE_COMMENT = 'UPDATE_COMMENT';
-export const updateComment = (id) => ({
-  type: UPDATE_COMMENT,
 export function deleteComment(id = null) {
   return function(dispatch) {
     dispatch(requestDeleteComment(id));
