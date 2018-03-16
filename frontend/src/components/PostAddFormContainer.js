@@ -27,4 +27,4 @@ class PostAddFormContainer extends Component {
   }
 }
 
-export default connect(null, null)(PostAddFormContainer);
+export default connect()(PostAddFormContainer);
