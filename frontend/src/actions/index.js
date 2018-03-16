@@ -71,7 +71,7 @@ export function savePost(id, title, body, author, category, timestamp) {
     const myRequest = new Request(requetsUrl, myInit);
     return fetch(myRequest)
     .then(
-      response => console.log(response.json()), error => console.log('An error occured: ', error)
+      response => response.json(), error => console.log('An error occured: ', error)
     )
     .then(() => dispatch(fetchPosts(null)))
   }
@@ -118,7 +118,7 @@ export function deletePost(id) {
     const myRequest = new Request(requetsUrl, myInit);
     return fetch(myRequest)
     .then(
-      response => console.log(response.json()), error => console.log('An error occured: ', error)
+      response => response.json(), error => console.log('An error occured: ', error)
     )
     .then((json) => dispatch(receiveDeletePost(id)))
   }
@@ -298,7 +298,6 @@ export const receiveVote = (id, voteScore, voteType) => ({
 })
 
 export function vote(id, option, type) {
-  console.log('id, option, type', id, option, type);
   return function(dispatch) {
     const voteOption = option === 'upvote' ? requestUpVote(id) : requestDownVote(id);
         

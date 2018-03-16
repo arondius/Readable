@@ -24,26 +24,14 @@ import {
   SORT_POSTS
 } from '../actions'
 
-function removeByKey(myObject, deleteKey) {
-  console.log('object',myObject);
-  return Object.keys(myObject)
-    .filter(key => key !== deleteKey)
-    .reduce((result, current) => {
-      result[current] = myObject[current];
-      return result;
-    }, {});
-}
-
 function sortByKey(array, key, direction = "up") {
     const newArray = array.slice();
     return newArray.sort(function(a, b) {
         var x = a[key];
         var y = b[key];
         if(direction === "down") {
-          console.log('down', ((x < y) ? -1 : ((x > y) ? 1 : 0)));
           return x - y;
         } else if (direction === "up") {
-          console.log('up', ((x < y) ? -1 : ((x > y) ? 0 : 1)));
           return y - x;
         }
     });
@@ -128,7 +116,6 @@ function posts(state = defaultPostsState, action) {
       }
     case RECEIVE_VOTE:
       if (action.voteType !== 'posts') {
-        console.log(action);
         return state;
       }
       return {
@@ -139,10 +126,7 @@ function posts(state = defaultPostsState, action) {
             if(item["id"] !== action.id) {
               return item
             }
-            
-            console.log('action.voteScore', action.voteScore);
             item["voteScore"] = action.voteScore
-            console.log('item["voteScore"]', item["voteScore"]);
             return {
               ...item
             }
@@ -195,9 +179,7 @@ function comments(state = defaultCommentsState, action) {
               return item
             }
             
-            console.log('action.voteScore', action.voteScore);
             item["voteScore"] = action.voteScore
-            console.log('item["voteScore"]', item["voteScore"]);
             return {
               ...item
             }
