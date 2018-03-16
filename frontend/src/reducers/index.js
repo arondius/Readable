@@ -183,8 +183,7 @@ function postEditForm(state = defaultpostEditState, action) {
       return {
         ...state,
         id: action.id,
-        open: (!state.open || (state.mode !== action.mode) || (state.id !== action.id && state.open)) ? true: false,
-        mode: action.mode
+        open: (!state.open || (state.id !== action.id && state.open)) ? true: false,
       }
     case CLOSE_POST_FORM:
         return {

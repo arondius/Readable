@@ -156,7 +156,10 @@ export function updatePost(id, title, body) {
     .then(
       response => response.json(), error => console.log('An error occured: ', error)
     )
-    .then(() => dispatch(fetchPosts(null)))
+    .then((json) => {
+      dispatch(receiveUpdatePost(id, json))
+      dispatch(closePostForm(id))
+    })
   }
 }
 
