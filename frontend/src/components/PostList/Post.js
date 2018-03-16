@@ -24,18 +24,22 @@ class Post extends Component {
         <p>Posted on: {postDate.toDateString()}</p>
         <p># of Comments: {this.props.post.commentCount}</p>
 
-        <button className="btn" onClick={() => this.props.dispatch(deletePost(this.props.post.id))}>Delete post</button>
-        <VoteWidget 
+        <VoteWidget
           id={this.props.post.id}
           type="posts"
           voteScore={this.props.post.voteScore}
         />
 
-        <PostEditFormContainer
-          post={this.props.post}
-          id={id}
-          initialValues={postValues}
-        />
+        <button className="btn" onClick={() => this.props.toggleEditPostClick(id)}>Edit post</button>
+        <button className="btn" onClick={() => this.props.dispatch(deletePost(this.props.post.id))}>Delete post</button>
+        {(this.props.postEditForm.open !== false && this.props.postEditForm.id === id)  ? 
+          <PostEditFormContainer
+            post={this.props.post}
+            id={id}
+            initialValues={postValues}
+          />
+        : 
+        null}
       </div>
     )
   }
@@ -43,6 +47,14 @@ class Post extends Component {
 
 const mapStateToProps = (state) => ({
     posts: state.posts,
+    postEditForm: state.postEditForm
 })
 
-export default connect(mapStateToProps)(Post);
+const mapDispatchToProps = (dispatch) => ({
+  dispatch,
+  toggleEditPostClick(id) {
+    dispatch(togglePostForm(id))
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post);

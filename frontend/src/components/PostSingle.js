@@ -18,7 +18,9 @@ class PostSingle extends Component {
       return(
         <Post post={this.props.post} />
       )
-    }
+    } else return (
+      <div>No post found!</div>
+    )
   }
   
   render() {
