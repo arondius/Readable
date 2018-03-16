@@ -233,8 +233,45 @@ export function deleteComment(id = null) {
   }
 }
 
+
+export const REQUEST_UPDATE_COMMENT = 'REQUEST_UPDATE_COMMENT';
+export const requestUpdateComment = (id) => ({
+  type: REQUEST_UPDATE_COMMENT,
   id
 })
+
+
+export const RECEIVE_UPDATE_COMMENT = 'RECEIVE_UPDATE_COMMENT';
+export const receiveUpdateComment = (id, json) => ({
+  type: RECEIVE_UPDATE_COMMENT,
+  id,
+  json
+})
+
+export function updateComment(id, body) {
+  return function(dispatch) {
+    dispatch(requestUpdateComment(id));
+    
+    const data = {id, body}
+    
+    const myInit = {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      headers: myHeaders,
+    }
+    
+    const requetsUrl = `${url}comments/${id}`
+    const myRequest = new Request(requetsUrl, myInit);
+    return fetch(myRequest)
+    .then(
+      response => response.json(), error => console.log('An error occured: ', error)
+    )
+    .then((json) => {
+      dispatch(receiveUpdateComment(id, json))
+      dispatch(closePostForm(id))
+    })
+  }
+}
 
 // Votes action creators
 export const REQUEST_UP_VOTE = 'REQUEST_UP_VOTE';
