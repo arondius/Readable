@@ -5,7 +5,7 @@ import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore, applyMiddleware, compose } from 'redux';
 import reducer from './reducers/index'
-import { fetchPosts } from './actions/index'
+import { fetchPosts, fetchCategories } from './actions/index'
 import { Provider } from 'react-redux';
 import {BrowserRouter as Router} from 'react-router-dom';
 import thunkMiddleware from 'redux-thunk';
@@ -24,6 +24,7 @@ const store = createStore(
 );
 
 store.dispatch(fetchPosts());
+store.dispatch(fetchCategories());
 
 ReactDOM.render(
   <Provider store={store}>

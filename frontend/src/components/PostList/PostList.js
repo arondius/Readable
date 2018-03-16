@@ -35,15 +35,15 @@ class PostList extends Component {
       <Sidebar>
         <h2>Categories:</h2>
         <ul>
-          <li>
-            <Link to="/category/react">React</Link>
-          </li>
-          <li>
-            <Link to="/category/redux">Redux</Link>
-          </li>
-          <li>
-            <Link to="/category/udacity">Udacity</Link>
-          </li>
+          {this.props.categories.map(
+            (category) => (
+              <li key={category.name}>
+                <Link to={`/category/${category.path}`}>
+                  {category.name}
+                </Link>
+              </li>
+            )
+          )}
         </ul>
         <PostAddFormContainer />
       </Sidebar>
@@ -52,4 +52,10 @@ class PostList extends Component {
 }
 }
 
-export default connect()(PostList);
+function mapStateToProps(state) {
+  return {
+    categories: state.categories.items
+  }
+}
+
+export default connect(mapStateToProps)(PostList);

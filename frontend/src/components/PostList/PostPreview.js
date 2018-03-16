@@ -21,7 +21,7 @@ class PostPreview extends Component {
         <h1>
           <Link 
             className="title-link"
-            to={`/post/${this.props.post.id}`}>{this.props.post.title}
+            to={`/${this.props.post.category}/${this.props.post.id}`}>{this.props.post.title}
           </Link>
         </h1>
         <p>Author: {this.props.post.author}</p>
