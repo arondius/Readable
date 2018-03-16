@@ -290,17 +290,17 @@ export const requestDownVote = (id) => ({
 })
 
 export const RECEIVE_VOTE = 'RECEIVE_VOTE';
-export const receiveVote = (id, voteScore) => ({
+export const receiveVote = (id, voteScore, voteType) => ({
   type: RECEIVE_VOTE,
   id,
-  voteScore
+  voteScore,
+  voteType
 })
 
 export function vote(id, option, type) {
   console.log('id, option, type', id, option, type);
   return function(dispatch) {
     const voteOption = option === 'upvote' ? requestUpVote(id) : requestDownVote(id);
-    dispatch(voteOption);
         
     const data = {option}
     const myInit = {
@@ -310,7 +310,6 @@ export function vote(id, option, type) {
     }
     
     const requetsUrl = `${url}${type}/${id}`
-    // console.log('requetsUrl', requetsUrl);
     const myRequest = new Request(requetsUrl, myInit);
     return fetch(myRequest)
     .then(
@@ -318,7 +317,7 @@ export function vote(id, option, type) {
     )
     .then(
       (json) => {
-        return dispatch(receiveVote(id, json.voteScore));
+        return dispatch(receiveVote(id, json.voteScore, type));
       }
     )
   }

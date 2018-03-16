@@ -87,35 +87,38 @@ function posts(state = defaultPostsState, action) {
           ...state.items.filter( (item) => item.id !== action.id )
         ]
       }
-      case SORT_POSTS:
-        switch(action.method) {
-          case "dateUp":
-            return {
-              ...state,
-              items: sortByKey(action.items, "timestamp", "up")
-            };
-          break;
-          case "dateDown":
-            return {
-              ...state,
-              items: sortByKey(action.items, "timestamp", "down")
-            };
-          break;
-          case "populairUp":
-            return {
-              ...state,
-              items: sortByKey(action.items, "voteScore")
-            };
-          break;
-          case "popularDown":
-            return {
-              ...state,
-              items: sortByKey(action.items, "voteScore", "down")
-            };
-          break;
-        }
+    case SORT_POSTS:
+      switch(action.method) {
+        case "dateUp":
+          return {
+            ...state,
+            items: sortByKey(action.items, "timestamp", "up")
+          };
+        break;
+        case "dateDown":
+          return {
+            ...state,
+            items: sortByKey(action.items, "timestamp", "down")
+          };
+        break;
+        case "populairUp":
+          return {
+            ...state,
+            items: sortByKey(action.items, "voteScore")
+          };
+        break;
+        case "popularDown":
+          return {
+            ...state,
+            items: sortByKey(action.items, "voteScore", "down")
+          };
+        break;
       }
     case RECEIVE_VOTE:
+      if (action.voteType !== 'posts') {
+        console.log(action);
+        return state;
+      }
       return {
         ...state,
         isFetching: false,
@@ -161,8 +164,28 @@ function comments(state = defaultCommentsState, action) {
           ...state.items.filter( (item) => item.id !== action.id )
         ]
       }
+    case RECEIVE_VOTE:
+      if (action.voteType !== 'comments') {
+        return state;
+      }
       return {
         ...state,
+        isFetching: false,
+        items: [
+          ...state.items.map( (item, index) => {
+            if(item["id"] !== action.id) {
+              return item
+            }
+            
+            console.log('action.voteScore', action.voteScore);
+            item["voteScore"] = action.voteScore
+            console.log('item["voteScore"]', item["voteScore"]);
+            return {
+              ...item
+            }
+          })
+        ]
+      }
       return {
         ...state,
         isFetching: false,
