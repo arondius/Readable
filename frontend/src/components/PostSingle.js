@@ -32,11 +32,7 @@ class PostSingle extends Component {
             </Link>
           </h3>
           {this.renderPostsOrLoadingIndicator()}
-          <h2>Comments</h2>
-          <CommentListContainer 
-            id={this.props.match.params.id}
-            CommentList={this.props.CommentList}
-          />
+          <CommentListContainer id={this.props.match.params.id} />
         </div>
       </Container>
     )
@@ -44,11 +40,9 @@ class PostSingle extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log(state, ownProps);
   return {
     post: state.posts.items.filter((post) => (post.id === ownProps.match.params.id))[0],
     isFetching: state.posts.isFetching,
-    CommentList: state.comments.items.filter((comment) => (comment.parentId === ownProps.match.params.id))
   }
 }
 
