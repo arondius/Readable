@@ -52,6 +52,21 @@ function sortByKey(array, key, direction = "up") {
     });
 }
 
+function updateObjectInArray(array, action) {
+    return array.map( (item, index) => {
+        if(item.id !== action.id) {
+            // This isn't the item we care about - keep it as-is
+            return item;
+        }
+        
+        // Otherwise, this is the one we want - return an updated value
+        return {
+            ...item,
+            ...action.json
+        };    
+    });
+}
+
 const defaultPostsState = {
   isFetching: false,
   items: []
@@ -195,6 +210,12 @@ function comments(state = defaultCommentsState, action) {
       return {
         ...state,
         isFetching: false,
+    case RECEIVE_UPDATE_COMMENT:
+      return {
+        ...state,
+        items: updateObjectInArray(state.items, action),
+        isFetching: false
+      }
     default:
       return state;
   }
