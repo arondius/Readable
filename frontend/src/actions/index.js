@@ -79,14 +79,14 @@ export const getPostsInCategory = (category) => ({
 })
 
 export const REQUEST_SAVE_POST = 'REQUEST_SAVE_POST';
-export const requestSavePost = (id, title, body, author, category, timestamp) => ({
+export const requestSavePost = (postValues) => ({
   type: REQUEST_SAVE_POST,
-  id,
-  title,
-  body,
-  author,
-  category,
-  timestamp,
+  id: postValues.id,
+  title: postValues.title,
+  body: postValues.body,
+  author: postValues.author,
+  category: postValues.category,
+  timestamp: postValues.timestamp,
 })
 
 export function savePost(id, title, body, author, category, timestamp) {
