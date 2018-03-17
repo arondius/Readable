@@ -79,25 +79,17 @@ export const getPostsInCategory = (category) => ({
 })
 
 export const REQUEST_SAVE_POST = 'REQUEST_SAVE_POST';
-export const requestSavePost = (postValues) => ({
+export const requestSavePost = () => ({
   type: REQUEST_SAVE_POST,
-  id: postValues.id,
-  title: postValues.title,
-  body: postValues.body,
-  author: postValues.author,
-  category: postValues.category,
-  timestamp: postValues.timestamp,
 })
 
-export function savePost(id, title, body, author, category, timestamp) {
+export function savePost(postValues) {
   return function(dispatch) {
-    dispatch(requestSavePost(id, title, body, author, category, timestamp))
-    
-    const data = {id, title, body, author, category, timestamp}
+    dispatch(requestSavePost())
         
     const myInit = {
       method: 'POST',
-      body: JSON.stringify(data),
+      body: JSON.stringify(postValues),
       headers: myHeaders,
     }
     
