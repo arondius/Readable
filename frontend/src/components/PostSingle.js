@@ -1,11 +1,12 @@
-import React, {Component} from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, {Component} from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import CommentListContainer from './CommentList/CommentListContainer'
 import LoadingIndicator from './LoadingIndicator'
-import Post from './PostList/Post';
+import Post from './PostList/Post'
 import Container from './Container'
+import CommentAddFormContainer from './CommentAddFormContainer'
 
 class PostSingle extends Component {
   renderPostsOrLoadingIndicator() {

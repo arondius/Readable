@@ -1,19 +1,21 @@
 import React, { Component } from 'react'
 import PostAddForm from './PostAddForm'
 import {savePost} from '../actions'
-import uuidGen from 'uuid'
+import uuid from '../utils'
 import {connect} from 'react-redux'
 
 class PostAddFormContainer extends Component {
   submit = values => {
-    const time = new Date();
-    const timestamp = time.getTime();
-    const id = uuidGen();
-    const title = values.postTitle;
-    const body = values.postBody;
-    const author = values.postAuthor;
-    const category = values.postCategory;
-    this.props.dispatch(savePost(id, title, body, author, category, timestamp))
+    const time = new Date()
+    const postValues = {
+      timestamp: time.getTime(),
+      id: uuid(),
+      title: values.postTitle,
+      body: values.postBody,
+      author: values.postAuthor,
+      category: values.postCategory,
+    }
+    this.props.dispatch(savePost(postValues))
   }
   
   render() {
@@ -27,8 +29,10 @@ class PostAddFormContainer extends Component {
   }
 }
 
-export default connect(function mapStateToProps(state) {
+function mapStateToProps(state) {
   return {
     categories: state.categories.items
   }
-})(PostAddFormContainer);
+}
+
+export default connect(mapStateToProps)(PostAddFormContainer);
