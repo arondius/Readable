@@ -15,7 +15,7 @@ let CommentEditForm = props => {
             name="postBody"
             component="textarea"
             type="text"
-            value={props.initialValues.body}
+            value={initialValues.body}
           />
         </div>
         <button className="btn btn--primary" type="submit">Submit</button>

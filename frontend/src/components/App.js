@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import PostListContainer from './PostList/PostListContainer';
 import CategoryListContainer from './CategoryList/CategoryListContainer';
 import PostSingle from './PostSingle';
-import Sidebar from './Sidebar'
 import '../App.css';
-import { Route, Link, withRouter } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 
 const App = (props) => {
   return (  

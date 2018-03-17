@@ -3,26 +3,32 @@ import { reducer as formReducer } from 'redux-form'
 
 import { 
   REQUEST_POSTS,
-  REQUEST_SAVE_POST,
-  REQUEST_DELETE_POST,
-  REQUEST_UPDATE_POST,
   RECEIVE_POSTS,
-  RECEIVE_DELETE_POST,
-  RECEIVE_UPDATE_POST,
+
+  REQUEST_SAVE_POST,
+  REQUEST_UPDATE_POST,
+
   REQUEST_COMMENTS,
   RECEIVE_COMMENTS,
+
+  REQUEST_DELETE_POST,
+  RECEIVE_DELETE_POST,
+  RECEIVE_UPDATE_POST,
   RECEIVE_DELETE_COMMENT,
-  DELETE_COMMENT,
+
   REQUEST_UPDATE_COMMENT,
   RECEIVE_UPDATE_COMMENT,
+
   TOGGLE_POST_FORM,
   CLOSE_POST_FORM,
+
   REQUEST_UP_VOTE,
   REQUEST_DOWN_VOTE,
   RECEIVE_VOTE,
-  GET_POSTS_IN_CATEGORY,
+
   REQUEST_CATEGORIES,
   RECEIVE_CATEGORIES,
+
   SORT_POSTS
 } from '../actions'
 
@@ -36,6 +42,7 @@ function sortByKey(array, key, direction = "up") {
         } else if (direction === "up") {
           return y - x;
         }
+        return null;
     });
 }
 
@@ -66,6 +73,7 @@ function posts(state = defaultPostsState, action) {
     case REQUEST_SAVE_POST:
     case REQUEST_UP_VOTE:
     case REQUEST_DOWN_VOTE:
+    case REQUEST_DELETE_POST:
       return {
         ...state,
           isFetching: true
@@ -96,25 +104,23 @@ function posts(state = defaultPostsState, action) {
             ...state,
             items: sortByKey(action.items, "timestamp", "up")
           };
-        break;
         case "dateDown":
           return {
             ...state,
             items: sortByKey(action.items, "timestamp", "down")
           };
-        break;
         case "populairUp":
           return {
             ...state,
             items: sortByKey(action.items, "voteScore")
           };
-        break;
         case "popularDown":
           return {
             ...state,
             items: sortByKey(action.items, "voteScore", "down")
           };
-        break;
+        default: 
+          return state
       }
     case RECEIVE_VOTE:
       if (action.voteType !== 'posts') {
@@ -223,6 +229,7 @@ function comments(state = defaultCommentsState, action) {
             if(item.parentId !== action.id) {
               return item;
             }
+            return null
           }
           )
         ]

@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
-import { fetchPosts } from '../../actions'
-
-import Sidebar from '../Sidebar'
 import PostList from './PostList'
-import PostAddFormContainer from '../PostAddFormContainer.js'
 import LoadingIndicator from '../LoadingIndicator'
 
 

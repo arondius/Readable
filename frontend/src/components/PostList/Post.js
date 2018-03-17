@@ -7,7 +7,7 @@ import VoteWidget from '../VoteWidget'
 class Post extends Component {
 
   render() {
-    const {id, postEditForm} = this.props.post
+    const {id} = this.props.post
     const postDate = new Date(this.props.post.timestamp);
     const postValues = {
       postTitle: this.props.post.title,

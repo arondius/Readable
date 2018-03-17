@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { fetchPosts, getPostsInCategory } from '../../actions'
+import { getPostsInCategory } from '../../actions'
 
 import Container from '../Container'
-import Sidebar from '../Sidebar'
 import LoadingIndicator from '../LoadingIndicator'
 import PostList from '../PostList/PostList'
 

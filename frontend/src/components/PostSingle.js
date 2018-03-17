@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import CommentListContainer from './CommentList/CommentListContainer'
 import LoadingIndicator from './LoadingIndicator'
 import Post from './PostList/Post';
-import Sidebar from './Sidebar.js'
 import Container from './Container'
 
 class PostSingle extends Component {

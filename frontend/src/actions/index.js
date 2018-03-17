@@ -333,8 +333,6 @@ export const receiveVote = (id, voteScore, voteType) => ({
 
 export function vote(id, option, type) {
   return function(dispatch) {
-    const voteOption = option === 'upvote' ? requestUpVote(id) : requestDownVote(id);
-        
     const data = {option}
     const myInit = {
       method: 'POST',
