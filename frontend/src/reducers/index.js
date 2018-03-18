@@ -155,7 +155,6 @@ function categories(state = defaultCategoriesState, action) {
     case RECEIVE_CATEGORIES:
       return {
         ...state,
-        bla: console.log(action),
         items: [
           ...action.categories.categories
         ]
