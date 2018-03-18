@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 
 import {
@@ -32,32 +32,32 @@ import {
 } from '../actions/actionTypes'
 
 function sortByKey(array, key, direction = "up") {
-    const newArray = array.slice();
+    const newArray = array.slice()
     return newArray.sort(function(a, b) {
-        var x = a[key];
-        var y = b[key];
+        var x = a[key]
+        var y = b[key]
         if(direction === "down") {
-          return x - y;
+          return x - y
         } else if (direction === "up") {
-          return y - x;
+          return y - x
         }
-        return null;
-    });
+        return null
+    })
 }
 
 function updateObjectInArray(array, action) {
     return array.map( (item, index) => {
         if(item.id !== action.id) {
             // This isn't the item we care about - keep it as-is
-            return item;
+            return item
         }
         
         // Otherwise, this is the one we want - return an updated value
         return {
             ...item,
             ...action.json
-        };    
-    });
+        }    
+    })
 }
 
 const defaultPostsState = {
@@ -76,13 +76,13 @@ function posts(state = defaultPostsState, action) {
       return {
         ...state,
           isFetching: true
-      };
+      }
     case RECEIVE_POSTS:
       return {
         ...state,
           isFetching: false,
           items: action.posts
-      };
+      }
     case RECEIVE_UPDATE_POST:
       return {
         ...state,
@@ -102,28 +102,28 @@ function posts(state = defaultPostsState, action) {
           return {
             ...state,
             items: sortByKey(action.items, "timestamp", "up")
-          };
+          }
         case "dateDown":
           return {
             ...state,
             items: sortByKey(action.items, "timestamp", "down")
-          };
+          }
         case "populairUp":
           return {
             ...state,
             items: sortByKey(action.items, "voteScore")
-          };
+          }
         case "popularDown":
           return {
             ...state,
             items: sortByKey(action.items, "voteScore", "down")
-          };
+          }
         default: 
           return state
       }
     case RECEIVE_VOTE:
       if (action.voteType !== 'posts') {
-        return state;
+        return state
       }
       return {
         ...state,
@@ -141,7 +141,7 @@ function posts(state = defaultPostsState, action) {
         ]
       }
     default:
-      return state;
+      return state
   }
 }
 
@@ -156,7 +156,7 @@ function categories(state = defaultCategoriesState, action) {
       return {
         ...state,
         isFetching: true
-      };
+      }
     case RECEIVE_CATEGORIES:
       return {
         ...state,
@@ -164,9 +164,9 @@ function categories(state = defaultCategoriesState, action) {
         items: [
           ...action.categories.categories
         ]
-      };
+      }
     default:
-      return state;
+      return state
   }
 }
 
@@ -184,13 +184,13 @@ function comments(state = defaultCommentsState, action) {
     return {
       ...state,
       isFetching: true
-    };
+    }
     case RECEIVE_COMMENTS:
     return {
       ...state,
       isFetching: false,
       items: action.comments
-    };
+    }
     case RECEIVE_DELETE_COMMENT:
       return {
         ...state,
@@ -200,7 +200,7 @@ function comments(state = defaultCommentsState, action) {
       }
     case RECEIVE_VOTE:
       if (action.voteType !== 'comments') {
-        return state;
+        return state
       }
       return {
         ...state,
@@ -226,7 +226,7 @@ function comments(state = defaultCommentsState, action) {
         items: [
           ...state.items.filter( (item) => {
             if(item.parentId !== action.id) {
-              return item;
+              return item
             }
             return null
           }
@@ -240,7 +240,7 @@ function comments(state = defaultCommentsState, action) {
         isFetching: false
       }
     default:
-      return state;
+      return state
   }
 }
 
@@ -264,10 +264,10 @@ function postEditForm(state = defaultpostEditState, action) {
             open: false
         }
     default:
-      return state;
+      return state
   }
 }
 
 export default combineReducers({
     posts, comments, postEditForm, categories, form: formReducer
-});
+})
