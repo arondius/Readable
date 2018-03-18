@@ -2,15 +2,12 @@ import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 
 import {
-  REQUEST_POSTS,
   RECEIVE_POSTS,
   REQUEST_CATEGORIES,
   RECEIVE_CATEGORIES,
   REQUEST_SAVE_POST,
-  REQUEST_POST,
   REQUEST_DELETE_POST,
   RECEIVE_DELETE_POST,
-  DELETE_POST,
   REQUEST_UPDATE_POST,
   RECEIVE_UPDATE_POST,
   TOGGLE_POST_FORM,
@@ -20,7 +17,6 @@ import {
   REQUEST_COMMENTS,
   RECEIVE_COMMENTS,
   REQUEST_SAVE_COMMENT,
-  UPDATE_COMMENT_COUNT,
   REQUEST_DELETE_COMMENT,
   RECEIVE_DELETE_COMMENT,
   REQUEST_UPDATE_COMMENT,
@@ -67,7 +63,6 @@ const defaultPostsState = {
 
 function posts(state = defaultPostsState, action) {
   switch(action.type) {
-    case REQUEST_POSTS:
     case REQUEST_UPDATE_POST:
     case REQUEST_SAVE_POST:
     case REQUEST_UP_VOTE:
@@ -181,6 +176,8 @@ function comments(state = defaultCommentsState, action) {
     case REQUEST_UPDATE_COMMENT:
     case REQUEST_UP_VOTE:
     case REQUEST_DOWN_VOTE:
+    case REQUEST_SAVE_COMMENT:
+    case REQUEST_DELETE_COMMENT:
     return {
       ...state,
       isFetching: true
@@ -194,6 +191,7 @@ function comments(state = defaultCommentsState, action) {
     case RECEIVE_DELETE_COMMENT:
       return {
         ...state,
+        isFetching: false,
         items: [
           ...state.items.filter( (item) => item.id !== action.id )
         ]

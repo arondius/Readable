@@ -4,10 +4,8 @@ import {
   REQUEST_CATEGORIES,
   RECEIVE_CATEGORIES,
   REQUEST_SAVE_POST,
-  REQUEST_POST,
   REQUEST_DELETE_POST,
   RECEIVE_DELETE_POST,
-  DELETE_POST,
   REQUEST_UPDATE_POST,
   RECEIVE_UPDATE_POST,
   TOGGLE_POST_FORM,
@@ -103,11 +101,6 @@ export function savePost(postValues) {
     .then(() => dispatch(fetchPosts(null)))
   }
 }
-
-export const requestPost = (id) => ({
-  type: REQUEST_POST,
-  id
-})
 
 export const requestDeletePost = () => ({
   type: REQUEST_DELETE_POST,

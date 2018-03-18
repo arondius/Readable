@@ -5,7 +5,6 @@ import {
   REQUEST_COMMENTS,
   RECEIVE_COMMENTS,
   REQUEST_SAVE_COMMENT,
-  UPDATE_COMMENT_COUNT,
   REQUEST_DELETE_COMMENT,
   RECEIVE_DELETE_COMMENT,
   REQUEST_UPDATE_COMMENT,
@@ -48,10 +47,6 @@ export const requestSaveComment = () => ({
   type: REQUEST_SAVE_COMMENT,
 })
 
-export const updateCommentCount = (parentId) => ({
-  type: UPDATE_COMMENT_COUNT,
-})
-
 export function saveComment(postValues) {
   return function(dispatch) {
     dispatch(requestSaveComment())
@@ -77,7 +72,6 @@ export function saveComment(postValues) {
 
 export const requestDeleteComment = (id) => ({
   type: REQUEST_DELETE_COMMENT,
-  id
 })
 
 export const receiveDeleteComment = (id) => ({
