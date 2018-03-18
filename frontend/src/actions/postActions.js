@@ -1,8 +1,6 @@
 import {
   REQUEST_POSTS,
   RECEIVE_POSTS,
-  REQUEST_CATEGORIES,
-  RECEIVE_CATEGORIES,
   REQUEST_SAVE_POST,
   REQUEST_DELETE_POST,
   RECEIVE_DELETE_POST,
@@ -42,39 +40,6 @@ export function fetchPosts() {
       response => response.json(), error => console.log('An error occured: ', error)
     )
     .then(json => dispatch(receivePosts(json)))
-  }
-}
-
-// Categories action creators
-export const requestCategories = () => ({
-  type: REQUEST_CATEGORIES,
-})
-
-export const receiveCategories = (json) => ({
-  type: RECEIVE_CATEGORIES,
-  categories: json,
-  receivedAt: Date.now
-})
-
-export function fetchCategories() {
-  return function(dispatch) {
-    dispatch(requestCategories())
-
-    const myInit = {
-      method: 'GET',
-      headers: myHeaders,
-    }
-    
-    const requetsUrl = `${url}categories`
-    const myRequest = new Request(requetsUrl, myInit)
-    return fetch(myRequest)
-    .then(
-      response => response.json(), error => console.log('An error occured: ', error)
-    )
-    .then(json => {
-      // console.log(json)
-      dispatch(receiveCategories(json))}
-    )
   }
 }
 
@@ -168,13 +133,6 @@ export function updatePost(id, title, body) {
     })
   }
 }
-
-export const GET_POSTS_IN_CATEGORY = 'GET_POSTS_IN_CATEGORY'
-export const getPostsInCategory = (category) => ({
-  type: GET_POSTS_IN_CATEGORY,
-  category
-})
-
 
 export const togglePostForm = (id) => ({
   type: TOGGLE_POST_FORM,
