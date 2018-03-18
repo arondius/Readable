@@ -17,10 +17,10 @@ class PostList extends Component {
     <Container>
       <div className="content">
         <div>Sort by:</div>
-        <button className="btn" onClick={() => this.props.dispatch(sortPosts('dateUp', this.props.posts))}>Newest</button>
-        <button className="btn" onClick={() => this.props.dispatch(sortPosts('dateDown', this.props.posts))}>Oldest</button>
-        <button className="btn" onClick={() => this.props.dispatch(sortPosts('populairUp', this.props.posts))}>Popular</button>
-        <button className="btn" onClick={() => this.props.dispatch(sortPosts('popularDown', this.props.posts))}>Unpopulair</button>
+        <button className="btn" onClick={() => this.props.dispatch(sortPosts('dateUp', this.props.allPosts))}>Newest</button>
+        <button className="btn" onClick={() => this.props.dispatch(sortPosts('dateDown', this.props.allPosts))}>Oldest</button>
+        <button className="btn" onClick={() => this.props.dispatch(sortPosts('populairUp', this.props.allPosts))}>Popular</button>
+        <button className="btn" onClick={() => this.props.dispatch(sortPosts('popularDown', this.props.allPosts))}>Unpopulair</button>
         <ul className="postlist">
           {
             this.props.posts.length > 0 ? this.props.posts.map(
@@ -54,7 +54,8 @@ class PostList extends Component {
 
 function mapStateToProps(state) {
   return {
-    categories: state.categories.items
+    categories: state.categories.items,
+    allPosts: state.posts.items
   }
 }
 
