@@ -5,7 +5,8 @@ import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore, applyMiddleware, compose } from 'redux';
 import reducer from './reducers/index'
-import { fetchPosts, fetchCategories } from './actions/postActions'
+import { fetchPosts } from './actions/postActions'
+import { fetchCategories } from './actions/categoryActions'
 import { Provider } from 'react-redux';
 import {BrowserRouter as Router} from 'react-router-dom';
 import thunkMiddleware from 'redux-thunk';
