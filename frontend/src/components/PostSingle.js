@@ -35,6 +35,7 @@ class PostSingle extends Component {
           </h3>
           {this.renderPostsOrLoadingIndicator()}
           <CommentListContainer id={this.props.match.params.id} />
+          <CommentAddFormContainer parentId={this.props.match.params.id}/>
         </div>
       </Container>
     )

@@ -29,7 +29,8 @@ import {
   REQUEST_CATEGORIES,
   RECEIVE_CATEGORIES,
 
-  SORT_POSTS
+  SORT_POSTS,
+  UPDATE_COMMENT_COUNT,
 } from '../actions'
 
 function sortByKey(array, key, direction = "up") {

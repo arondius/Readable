@@ -223,6 +223,39 @@ export function fetchComments(postId = null) {
   }
 }
 
+export const REQUEST_SAVE_COMMENT = 'REQUEST_SAVE_COMMENT';
+export const requestSaveComment = () => ({
+  type: REQUEST_SAVE_COMMENT,
+})
+
+export const UPDATE_COMMENT_COUNT = 'UPDATE_COMMENT_COUNT';
+export const updateCommentCount = (parentId) => ({
+  type: UPDATE_COMMENT_COUNT,
+})
+
+export function saveComment(postValues) {
+  return function(dispatch) {
+    dispatch(requestSaveComment())
+        
+    const myInit = {
+      method: 'POST',
+      body: JSON.stringify(postValues),
+      headers: myHeaders,
+    }
+    
+    const requetsUrl = `${url}comments`
+    const myRequest = new Request(requetsUrl, myInit);
+    return fetch(myRequest)
+    .then(
+      response => response.json(), error => console.log('An error occured: ', error)
+    )
+    .then(() => {
+      dispatch(fetchComments(postValues.parentId))
+      dispatch(fetchPosts())
+    })
+  }
+}
+
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const addComment = (id) => ({
   type: ADD_COMMENT,
@@ -258,7 +291,10 @@ export function deleteComment(id = null) {
     .then(
       response => response.json(), error => console.log('An error occured: ', error)
     )
-    .then((json) => dispatch(receiveDeleteComment(id)))
+    .then((json) => {
+      dispatch(receiveDeleteComment(id))
+      dispatch(fetchPosts())
+    })
   }
 }
 
