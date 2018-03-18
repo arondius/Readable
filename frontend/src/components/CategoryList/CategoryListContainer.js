@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { getPostsInCategory } from '../../actions'
+import { getPostsInCategory } from '../../actions/postActions'
 
 import Container from '../Container'
 import LoadingIndicator from '../LoadingIndicator'

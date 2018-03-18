@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import CommentEditForm from './CommentEditForm'
-import {updateComment} from '../actions'
+import {updateComment} from '../actions/commentActions'
 import {connect} from 'react-redux'
 
 class CommentEditFormContainer extends Component {

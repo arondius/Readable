@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PostPreview from './PostPreview'
 import {connect} from 'react-redux'
 
-import {sortPosts} from '../../actions'
+import {sortPosts} from '../../actions/postActions'
 
 
 import Container from '../Container'

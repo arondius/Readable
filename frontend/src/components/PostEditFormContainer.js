@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PostEditForm from './PostEditForm'
-import {updatePost} from '../actions'
+import {updatePost} from '../actions/postActions'
 import {connect} from 'react-redux'
 
 class PostEditFormContainer extends Component {

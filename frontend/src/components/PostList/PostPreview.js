@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-import {togglePostForm, deletePost} from '../../actions'
+import {togglePostForm, deletePost} from '../../actions/postActions'
 import PostEditFormContainer from '../PostEditFormContainer'
 import VoteWidget from '../VoteWidget'
 

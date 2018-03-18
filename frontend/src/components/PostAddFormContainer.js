@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PostAddForm from './PostAddForm'
-import {savePost} from '../actions'
+import {savePost} from '../actions/postActions'
 import uuid from '../utils'
 import {connect} from 'react-redux'
 

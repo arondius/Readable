@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {togglePostForm, deleteComment} from '../../actions'
+import {togglePostForm} from '../../actions/postActions'
+import {deleteComment} from '../../actions/commentActions'
 
 import VoteWidget from '../VoteWidget'
 import CommentEditFormContainer from '../CommentEditFormContainer'

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { vote } from '../actions'
+import { vote } from '../actions/voteActions'
 class VoteWidget extends Component {
 
   render() {
