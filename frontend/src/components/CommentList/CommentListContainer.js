@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import CommentList from './CommentList';
-import LoadingIndicator from '../LoadingIndicator'
+
 import { fetchComments } from '../../actions/commentActions'
 import { connect } from 'react-redux';
+
+import CommentList from './CommentList';
+import LoadingIndicator from '../LoadingIndicator'
+import CommentAddFormContainer from '../CommentAddFormContainer'
 
 class CommentListContainer extends Component {
   componentWillMount() {
@@ -23,6 +26,7 @@ class CommentListContainer extends Component {
     return(
       <div>
         {this.renderCommentsOrLoadingIndicator()}
+        <CommentAddFormContainer parentId={this.props.id}/>
       </div>
     )
   }

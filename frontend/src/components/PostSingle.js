@@ -6,7 +6,6 @@ import CommentListContainer from './CommentList/CommentListContainer'
 import LoadingIndicator from './LoadingIndicator'
 import Post from './PostList/Post'
 import Container from './Container'
-import CommentAddFormContainer from './CommentAddFormContainer'
 
 class PostSingle extends Component {
   renderPostsOrLoadingIndicator() {
@@ -35,7 +34,6 @@ class PostSingle extends Component {
           </h3>
           {this.renderPostsOrLoadingIndicator()}
           <CommentListContainer id={this.props.match.params.id} />
-          <CommentAddFormContainer parentId={this.props.match.params.id}/>
         </div>
       </Container>
     )

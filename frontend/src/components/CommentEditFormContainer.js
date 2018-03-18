@@ -3,20 +3,18 @@ import CommentEditForm from './CommentEditForm'
 import {updateComment} from '../actions/commentActions'
 import {connect} from 'react-redux'
 
-const CommentEditFormContainer = ({id, postBody, dispatch, initialValues}) {
-  const submit = ({{id, postBody}}) => {
+const CommentEditFormContainer = ({id, postBody, dispatch, initialValues}) => {
+  const submit = ({id, postBody}) => {
     dispatch(updateComment(id, postBody));
   }
   
-  render() {
-    return (
-      <CommentEditForm
-        form="addCommentForm"
-        onSubmit={submit}
-        initialValues={initialValues}
-      />
-    )
-  }
+  return (
+    <CommentEditForm
+      form="addCommentForm"
+      onSubmit={submit}
+      initialValues={initialValues}
+    />
+  )
 }
 
 export default connect()(CommentEditFormContainer);
