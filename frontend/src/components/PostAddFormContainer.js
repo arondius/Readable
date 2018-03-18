@@ -4,29 +4,27 @@ import {savePost} from '../actions/postActions'
 import uuid from '../utils'
 import {connect} from 'react-redux'
 
-class PostAddFormContainer extends Component {
-  submit = values => {
+const PostAddFormContainer = ({postTitle, postBody, postAuthor, postCategory, dispatch, categories}) => {
+  const submit = ({postTitle, postBody, postAuthor, postCategory}) => {
     const time = new Date()
     const postValues = {
       timestamp: time.getTime(),
       id: uuid(),
-      title: values.postTitle,
-      body: values.postBody,
-      author: values.postAuthor,
-      category: values.postCategory,
+      title: postTitle,
+      body: postBody,
+      author: postAuthor,
+      category: postCategory,
     }
-    this.props.dispatch(savePost(postValues))
+    dispatch(savePost(postValues))
   }
   
-  render() {
-    return (
-      <PostAddForm
-        form="addPostForm"
-        onSubmit={this.submit}
-        categories={this.props.categories}
-      />
-    )
-  }
+  return (
+    <PostAddForm
+      form="addPostForm"
+      onSubmit={submit}
+      categories={categories}
+    />
+  )
 }
 
 function mapStateToProps(state) {

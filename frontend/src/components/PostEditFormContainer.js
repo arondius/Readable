@@ -3,20 +3,17 @@ import PostEditForm from './PostEditForm'
 import {updatePost} from '../actions/postActions'
 import {connect} from 'react-redux'
 
-class PostEditFormContainer extends Component {
-  submit = ({id, postTitle, postBody}) => {
-    this.props.dispatch(updatePost(id, postTitle, postBody));
+const PostEditFormContainer = ({id, postTitle, postBody, dispatch, initialValues}) => {
+  const submit = ({id, postTitle, postBody}) => {
+    dispatch(updatePost(id, postTitle, postBody));  
   }
-  
-  render() {
-    return (
-      <PostEditForm
-        form="editPostForm"
-        onSubmit={this.submit}
-        initialValues={this.props.initialValues}
-      />
-    )
-  }
+  return (
+    <PostEditForm
+      form="editPostForm"
+      onSubmit={submit}
+      initialValues={initialValues}
+    />
+  )
 }
 
 export default connect(null, null)(PostEditFormContainer);
