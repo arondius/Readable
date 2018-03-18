@@ -4,11 +4,8 @@ import {updatePost} from '../actions/postActions'
 import {connect} from 'react-redux'
 
 class PostEditFormContainer extends Component {
-  submit = values => {
-    const id = values.id;
-    const title = values.postTitle;
-    const body = values.postBody;
-    this.props.dispatch(updatePost(id, title, body));
+  submit = ({id, postTitle, postBody}) => {
+    this.props.dispatch(updatePost(id, postTitle, postBody));
   }
   
   render() {
