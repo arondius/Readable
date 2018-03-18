@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Sidebar = props => {
+const Sidebar = ({children}) => {
     return(
       <div className="sidebar">
-        {props.children}
+        {children}
       </div>
     )
 }
