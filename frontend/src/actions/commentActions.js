@@ -39,7 +39,10 @@ export function fetchComments(postId = null) {
     .then(
       response => response.json(), error => console.log('An error occured: ', error)
     )
-    .then(json => dispatch(receiveComments(postId, json)))
+    .then(json => {
+      dispatch(receiveComments(postId, json))
+      dispatch(closePostForm(postId))
+    })
   }
 }
 
