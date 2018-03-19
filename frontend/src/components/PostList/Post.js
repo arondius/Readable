@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {togglePostForm, deletePost} from '../../actions/postActions'
 import PostEditFormContainer from '../PostEditFormContainer'
 import VoteWidget from '../VoteWidget'
 
 class Post extends Component {
+
+  handleDeleteClick() {
+    this.props.dispatch(deletePost(this.props.post.id))
+    this.props.history.push('/')
+  }
 
   render() {
     const {id} = this.props.post
@@ -31,7 +37,7 @@ class Post extends Component {
         />
 
         <button className="btn" onClick={() => this.props.toggleEditPostClick(id)}>Edit post</button>
-        <button className="btn" onClick={() => this.props.dispatch(deletePost(this.props.post.id))}>Delete post</button>
+        <button className="btn" onClick={() => this.handleDeleteClick()}>Delete post</button>
         {(this.props.postEditForm.open !== false && this.props.postEditForm.id === id)  ? 
           <PostEditFormContainer
             post={this.props.post}
@@ -57,4 +63,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Post);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Post));
