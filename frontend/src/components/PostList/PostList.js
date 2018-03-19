@@ -16,6 +16,14 @@ class PostList extends Component {
     return(
     <Container>
       <div className="content">
+        {
+          this.props.match.params.category ?
+            <Link to="/">
+              <i className="fas fa-arrow-circle-left heading-icon heading-icon--left"></i>
+              Back to the list of Posts
+            </Link> : 
+          null
+        }
         <div>Sort by:</div>
         <button className="btn" onClick={() => this.props.dispatch(sortPosts('dateUp', this.props.allPosts))}>Newest</button>
         <button className="btn" onClick={() => this.props.dispatch(sortPosts('dateDown', this.props.allPosts))}>Oldest</button>

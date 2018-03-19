@@ -12,7 +12,7 @@ class PostListContainer extends Component {
       <div>
         {this.props.isFetching ? 
           <LoadingIndicator /> : 
-          <PostList posts={this.props.posts}/>
+          <PostList posts={this.props.posts} {...this.props} />
         }
       </div>
     )

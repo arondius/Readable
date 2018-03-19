@@ -13,7 +13,7 @@ class CategoryListContainer extends Component {
       return <LoadingIndicator />
     }
     if(this.props.posts.length > 0) {
-      return <PostList posts={this.props.posts}/>
+      return <PostList posts={this.props.posts} {...this.props}/>
     } else {
       return(
         <Container>
