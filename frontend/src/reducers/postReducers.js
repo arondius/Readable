@@ -2,8 +2,6 @@ import { sortByKey, updateObjectInArray } from './helpers'
 
 import {
   RECEIVE_POSTS,
-  REQUEST_CATEGORIES,
-  RECEIVE_CATEGORIES,
   REQUEST_SAVE_POST,
   REQUEST_DELETE_POST,
   RECEIVE_DELETE_POST,

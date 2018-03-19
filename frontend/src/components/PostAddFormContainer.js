@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PostAddForm from './PostAddForm'
 import {savePost} from '../actions/postActions'
 import uuid from '../utils'

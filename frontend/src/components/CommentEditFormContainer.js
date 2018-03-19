@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import CommentEditForm from './CommentEditForm'
 import {updateComment} from '../actions/commentActions'
 import {connect} from 'react-redux'

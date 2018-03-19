@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PostEditForm from './PostEditForm'
 import {updatePost} from '../actions/postActions'
 import {connect} from 'react-redux'
